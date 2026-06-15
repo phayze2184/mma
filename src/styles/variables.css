@@ -1,0 +1,138 @@
+/* ============================================================
+   PRIMITIVES
+   ============================================================ */
+
+:root {
+
+  /* --- Color --- */
+
+  /* Brand */
+  --color-soft-white:       oklch(97.8% 0.006 255.5);  /* #F5F8FC */
+  --color-linen:            oklch(91%   0.017 76.1);   /* #E8E0D5 */
+  --color-forest:           oklch(38.2% 0.041 166.3);  /* #2D4A3E */
+  --color-dark-espresso:    oklch(30.7% 0.034 54.8);   /* #3D2B1F */
+  --color-warm-gold:        oklch(70.2% 0.12  82.1);   /* #C4973B */
+  --color-sage-teal:        oklch(54.7% 0.058 175.6);  /* #4A7C6F */
+
+  /* Yellow */
+  --color-yellow-500:       oklch(79.8% 0.164 82.7);   /* #F0B100 */
+  --color-yellow-700:       oklch(55.5% 0.127 62.5);   /* #A65F00 */
+
+  /* Green */
+  --color-green-50:         oklch(98.2% 0.018 155.8);  /* #F0FDF4 */
+  --color-green-100:        oklch(96.2% 0.043 156.7);  /* #DCFCE7 */
+  --color-green-600:        oklch(63.2% 0.186 147.4);  /* #00A63E */
+  --color-green-700:        oklch(53%   0.149 149);    /* #008236 */
+  --color-green-900:        oklch(39.3% 0.096 152.3);  /* #0D542B */
+  --color-green-950:        oklch(26.5% 0.065 152.8);  /* #032E15 */
+
+  /* Taupe */
+  --color-taupe-50:         oklch(98.6% 0.002 67.8);   /* #FBFAF9 */
+  --color-taupe-100:        oklch(96%   0.002 17.2);   /* #F3F1F1 */
+  --color-taupe-200:        oklch(92.2% 0.005 34.3);   /* #E8E4E3 */
+  --color-taupe-300:        oklch(86.8% 0.007 39.5);   /* #D8D2D0 */
+  --color-taupe-400:        oklch(71.4% 0.014 41.2);   /* #ABA09C */
+  --color-taupe-500:        oklch(54.7% 0.021 43.1);   /* #7C6D67 */
+  --color-taupe-600:        oklch(43.8% 0.017 39.3);   /* #5B4F4B */
+  --color-taupe-700:        oklch(36.7% 0.016 35.7);   /* #473C39 */
+  --color-taupe-800:        oklch(26.8% 0.011 36.5);   /* #2B2422 */
+  --color-taupe-900:        oklch(21.4% 0.009 43.1);   /* #1D1816 */
+  --color-taupe-950:        oklch(14.7% 0.004 49.2);   /* #0C0A09 */
+
+  /* Alpha */
+  --color-dark-espresso-85: oklch(30.7% 0.034 54.8 / 0.85);  /* #3D2B1F @ 85% */
+  --color-dark-espresso-30: oklch(30.7% 0.034 54.8 / 0.30);  /* #3D2B1F @ 30% */
+  --color-dark-espresso-10: oklch(30.7% 0.034 54.8 / 0.10);  /* #3D2B1F @ 10% */
+  --color-linen-80:         oklch(91%   0.017 76.1  / 0.80);  /* #E8E0D5 @ 80% */
+  --color-transparent:      oklch(100%  0     89.9  / 0);     /* #FFFFFF @ 0%  */
+
+
+  /* --- Spacing --- */
+
+  --spacing-0:  0px;
+  --spacing-1:  2px;
+  --spacing-2:  6px;
+  --spacing-3:  8px;
+  --spacing-4:  12px;
+  --spacing-5:  16px;
+  --spacing-6:  20px;
+  --spacing-7:  24px;
+  --spacing-8:  32px;
+  --spacing-9:  40px;
+  --spacing-10: 48px;
+  --spacing-11: 64px;
+  --spacing-12: 80px;
+  --spacing-13: 96px;
+  --spacing-14: 120px;
+
+
+  /* --- Size --- */
+
+  /* Icon */
+  --size-icon-xs: 16px;
+  --size-icon-sm: 20px;
+  --size-icon-md: 24px;
+  --size-icon-lg: 32px;
+  --size-icon-xl: 48px;
+
+  /* Control */
+  --size-control-sm: 24px;
+  --size-control-md: 40px;
+  --size-control-lg: 48px;
+  --size-control-xl: 56px;
+
+  /* Container */
+  --size-container-sm:  640px;
+  --size-container-md:  960px;
+  --size-container-lg:  1200px;
+  --size-container-xl:  1440px;
+
+
+  /* --- Border Radius --- */
+
+  --radius-sm:    4px;
+  --radius-md:    8px;
+  --radius-lg:    12px;
+  --radius-xl:    16px;
+  --radius-2xl:   24px;
+  --radius-round: 9999px;
+
+
+  /* --- Border Width --- */
+
+  --border-hairline: 1px;
+  --border-default:  1.5px;
+  --border-thick:    2px;
+
+
+  /* --- Z-Index --- */
+
+  --z-base:     0;
+  --z-dropdown: 1000;
+  --z-sticky:   1100;
+  --z-overlay:  1200;
+  --z-modal:    1300;
+  --z-toast:    1400;
+  --z-tooltip:  1500;
+
+
+  /* --- Opacity --- */
+
+  --opacity-subtle:      0.04;
+  --opacity-muted:       0.08;
+  --opacity-soft:        0.16;
+  --opacity-medium:      0.4;
+  --opacity-strong:      0.64;
+  --opacity-near-opaque: 0.88;
+  --opacity-full:        1;
+
+
+  /* --- Elevation (Box Shadow) --- */
+
+  --elevation-1: 0 1px  2px  0px  oklch(30.7% 0.034 54.8 / 0.06);
+  --elevation-2: 0 2px  8px  -1px oklch(30.7% 0.034 54.8 / 0.08);
+  --elevation-3: 0 6px  16px -2px oklch(30.7% 0.034 54.8 / 0.10);
+  --elevation-4: 0 12px 32px -4px oklch(30.7% 0.034 54.8 / 0.14);
+
+  
+}

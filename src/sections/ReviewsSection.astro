@@ -1,0 +1,115 @@
+---
+import SectionHeader from '../components/SectionHeader.astro';
+import ReviewCard from '../components/ReviewCard.astro';
+import Button from '../components/Button.astro';
+
+const reviews = [
+  {
+    quote: 'Dosarul nostru a fost aprobat fără o singură revenire. Profesionalism real.',
+    initials: 'CM',
+    name: 'Cronos Med',
+    clientType: 'Clinică stomatologică',
+    stars: 5,
+  },
+  {
+    quote: 'Ne-au scutit de luni de birocrație. Totul clar, la timp, fără costuri ascunse.',
+    initials: 'DC',
+    name: 'Derma Clinique',
+    clientType: 'Clinică estetică',
+    stars: 5,
+  },
+  {
+    quote: 'Am deschis cabinetul fără blocaje majore. Echipa ne-a ghidat clar prin formalități și pașii necesari.',
+    initials: 'GM',
+    name: 'CORESTH Beauty Med',
+    clientType: 'Clinică estetică',
+    stars: 4,
+  },
+];
+---
+
+<section class="reviews">
+  <div class="reviews__inner">
+
+    <div class="reviews__content">
+
+      <SectionHeader
+        eyebrow="Conform GDP & GMP"
+        heading="Rezultate,"
+        headingAccent="nu promisiuni"
+        size="large"
+        mode="on-light"
+        accentColor="green"
+      >
+        Acoperim partea administrativă și comunicarea pentru afaceri din sănătate. De la primul dosar la primul pacient, lucrăm într-un limbaj clar: al dumneavoastră, al autorităților și al pacientului.
+      </SectionHeader>
+
+      <div class="reviews__grid">
+        {reviews.map(r => (
+          <ReviewCard
+            quote={r.quote}
+            initials={r.initials}
+            name={r.name}
+            clientType={r.clientType}
+            stars={r.stars}
+          />
+        ))}
+      </div>
+
+    </div>
+
+    <Button href="tel:+40732032351" variant="secondary">Solicită o evaluare gratuită</Button>
+
+  </div>
+</section>
+
+<style>
+  /* ── Section ── */
+
+  .reviews {
+    background-color: var(--color-bg-page);
+    padding-block: var(--spacing-section-y); /* 120px */
+  }
+
+  .reviews__inner {
+    max-width: var(--size-container-lg); /* 1200px */
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: var(--spacing-page-inline); /* 20px */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-gap-very-loose); /* 48px */
+  }
+
+  /* ── Content: header + grid stacked ── */
+
+  .reviews__content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-gap-very-loose); /* 48px */
+  }
+
+  /* ── Cards grid ── */
+
+  .reviews__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--spacing-gap-default); /* 20px */
+    width: 100%;
+    align-items: stretch;
+  }
+
+  /* ── Responsive ── */
+
+  @media (max-width: 768px) {
+    .reviews {
+      padding-block: var(--spacing-section-x-compact); /* 48px */
+    }
+
+    .reviews__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

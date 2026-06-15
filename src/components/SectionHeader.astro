@@ -1,0 +1,176 @@
+---
+import Eyebrow from './Eyebrow.astro';
+
+interface Props {
+  eyebrow: string;
+  heading: string;
+  headingAccent: string;
+  size?: 'large' | 'small';
+  mode?: 'on-light' | 'on-dark';
+  accentColor?: 'gold' | 'green';
+  class?: string;
+}
+
+const {
+  eyebrow,
+  heading,
+  headingAccent,
+  size = 'large',
+  mode = 'on-light',
+  accentColor = 'gold',
+  class: className,
+} = Astro.props;
+---
+
+<div class:list={['section-header', `section-header--${size}`, `section-header--${mode}`, accentColor === 'green' && 'section-header--accent-green', className]}>
+
+  <div class="section-header__left">
+    <Eyebrow {mode}>{eyebrow}</Eyebrow>
+
+    <h2 class="section-header__heading">
+      <span class="section-header__heading-main">{heading}</span>
+      <br />
+      <em class="section-header__heading-accent">{headingAccent}</em><span class="section-header__heading-period">.</span>
+    </h2>
+  </div>
+
+  <p class="section-header__body">
+    <slot />
+  </p>
+
+</div>
+
+<style>
+  /* ============================================================
+     SECTION HEADER BASE
+     ============================================================ */
+
+  .section-header {
+    display: flex;
+    width: 100%;
+  }
+
+  .section-header__left {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-gap-tight); /* 16px */
+  }
+
+  .section-header__heading {
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 1.91rem + 1.45vw, 3rem); /* 36px → 48px */
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-display); /* 115% */
+    letter-spacing: var(--letter-spacing-tight);
+    font-style: normal;
+  }
+
+  .section-header__heading-accent {
+    font-style: italic;
+  }
+
+
+  /* ============================================================
+     SIZE — LARGE (horizontal split)
+     ============================================================ */
+
+  .section-header--large .section-header__heading {
+    font-size: clamp(2.25rem, 1.57rem + 2.91vw, 3.75rem); /* 36px → 60px */
+  }
+
+  .section-header--large {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--spacing-gap-very-loose); /* 48px */
+  }
+
+  .section-header--large .section-header__left {
+    max-width: 520px;
+  }
+
+  .section-header--large .section-header__body {
+    flex: 1 0 0;
+    max-width: 520px;
+    text-align: right;
+    align-self: flex-end;
+  }
+
+
+  @media (max-width: 768px) {
+    .section-header--large {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .section-header--large .section-header__left {
+      max-width: 100%;
+    }
+
+    .section-header--large .section-header__body {
+      max-width: 100%;
+      text-align: left;
+      align-self: flex-start;
+    }
+  }
+
+
+  /* ============================================================
+     SIZE — SMALL (stacked)
+     ============================================================ */
+
+  .section-header--small {
+    flex-direction: column;
+    gap: var(--spacing-gap-tight); /* 16px */
+  }
+
+  .section-header--small .section-header__left {
+    width: 100%;
+  }
+
+  .section-header--small .section-header__body {
+    width: 80%;
+  }
+
+
+  /* ============================================================
+     MODE — ON LIGHT
+     ============================================================ */
+
+  .section-header--on-light .section-header__heading-main   { color: var(--color-text-primary); }
+  .section-header--on-light .section-header__heading-accent { color: var(--color-text-accent-gold); }
+  .section-header--on-light .section-header__heading-period { color: var(--color-text-primary); }
+  .section-header--on-light .section-header__body           { color: var(--color-text-primary-muted); }
+
+
+  /* ============================================================
+     MODE — ON DARK
+     ============================================================ */
+
+  .section-header--on-dark .section-header__heading-main   { color: var(--color-text-inverse); }
+  .section-header--on-dark .section-header__heading-accent { color: var(--color-text-accent-gold-inverse); }
+  .section-header--on-dark .section-header__heading-period { color: var(--color-text-inverse); }
+  .section-header--on-dark .section-header__body           { color: var(--color-text-inverse-muted); }
+
+
+  /* ============================================================
+     ACCENT COLOR — GREEN OVERRIDE
+     ============================================================ */
+
+  .section-header--accent-green .section-header__heading-accent {
+    color: var(--color-text-accent-green);
+  }
+
+
+  /* ============================================================
+     BODY TEXT (shared)
+     ============================================================ */
+
+  .section-header__body {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-md);    /* 18px */
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-lg);  /* 150% */
+    letter-spacing: var(--letter-spacing-normal);
+  }
+</style>

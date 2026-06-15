@@ -1,0 +1,85 @@
+---
+interface Props {
+  variant?: 'primary' | 'secondary' | 'secondary-inverse';
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  class?: string;
+}
+
+const {
+  variant = 'primary',
+  href,
+  type = 'button',
+  class: className,
+} = Astro.props;
+
+const tag = href ? 'a' : 'button';
+---
+
+{tag === 'a' ? (
+  <a href={href} class:list={['btn', `btn--${variant}`, className]}>
+    <slot />
+  </a>
+) : (
+  <button type={type} class:list={['btn', `btn--${variant}`, className]}>
+    <slot />
+  </button>
+)}
+
+<style>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding-block: var(--spacing-component-sm);   /* 16px */
+    padding-inline: var(--spacing-component-md);  /* 20px */
+    border-radius: var(--radius-button);
+    font-family: var(--font-sans);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-lg);
+    letter-spacing: var(--letter-spacing-wider);
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 150ms ease, border-color 150ms ease;
+    border: none;
+  }
+
+  /* --- Primary --- */
+
+  .btn--primary {
+    background-color: var(--color-action-primary-default);
+    color: var(--color-text-inverse);
+  }
+
+  .btn--primary:hover  { background-color: var(--color-action-primary-hover); }
+  .btn--primary:active { background-color: var(--color-action-primary-active); }
+
+
+  /* --- Secondary --- */
+
+  .btn--secondary {
+    background-color: var(--color-action-secondary-default);
+    color: var(--color-text-accent-green);
+    border: var(--border-default) solid var(--color-action-primary-default);
+  }
+
+  .btn--secondary:hover  { background-color: var(--color-action-secondary-hover); }
+  .btn--secondary:active { background-color: var(--color-action-secondary-active); }
+
+
+  /* --- Secondary inverse (on dark backgrounds) --- */
+
+  .btn--secondary-inverse {
+    background-color: transparent;
+    color: #dcfce7;
+    border: 1.5px solid #dcfce7;
+  }
+
+  .btn--secondary-inverse:hover  { background-color: rgba(220, 252, 231, 0.08); }
+  .btn--secondary-inverse:active { background-color: rgba(220, 252, 231, 0.15); }
+
+  @media (max-width: 768px) {
+    .btn { width: 100%; }
+  }
+</style>

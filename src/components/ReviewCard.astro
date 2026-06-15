@@ -1,0 +1,147 @@
+---
+import starFilledIcon  from '../assets/icons/star-filled.svg?url';
+import starOutlineIcon from '../assets/icons/star-outline.svg?url';
+
+interface Props {
+  quote: string;
+  initials: string;
+  name: string;
+  clientType: string;
+  stars?: number;
+}
+
+const {
+  quote,
+  initials,
+  name,
+  clientType,
+  stars = 5,
+} = Astro.props;
+---
+
+<article class="review-card">
+
+  <!-- Stars -->
+  <div class="review-card__stars" aria-label={`${stars} din 5 stele`}>
+    {Array.from({ length: 5 }).map((_, i) => (
+      <img
+        src={i < stars ? starFilledIcon : starOutlineIcon}
+        width="16"
+        height="16"
+        alt=""
+        aria-hidden="true"
+      />
+    ))}
+  </div>
+
+  <!-- Quote -->
+  <blockquote class="review-card__quote">
+    <p>{quote}</p>
+  </blockquote>
+
+  <!-- Client -->
+  <div class="review-card__client">
+    <div class="review-card__badge" aria-hidden="true">
+      <span class="review-card__initials">{initials}</span>
+    </div>
+    <div class="review-card__info">
+      <p class="review-card__name">{name}</p>
+      <p class="review-card__type">{clientType}</p>
+    </div>
+  </div>
+
+</article>
+
+<style>
+  /* ── Card shell ── */
+
+  .review-card {
+    background-color: var(--color-bg-surface-green);
+    border-radius: var(--radius-2xl); /* 24px */
+    padding: var(--spacing-component-lg); /* 40px */
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-8); /* 32px */
+    height: 100%;
+  }
+
+  /* ── Stars ── */
+
+  .review-card__stars {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-gap-tightest); /* 6px */
+  }
+
+  /* ── Quote ── */
+
+  .review-card__quote {
+    margin: 0;
+    padding: 0;
+  }
+
+  .review-card__quote p {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-md);          /* 18px */
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-lg);
+    letter-spacing: var(--letter-spacing-normal);
+    color: var(--color-text-inverse);
+  }
+
+  /* ── Client row ── */
+
+  .review-card__client {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-gap-tight); /* 16px */
+    margin-block-start: auto; /* push to bottom */
+  }
+
+  /* Avatar badge */
+  .review-card__badge {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    background-color: var(--color-linen);
+    border-radius: var(--radius-round);
+  }
+
+  .review-card__initials {
+    font-family: var(--font-display);
+    font-size: var(--font-size-2xl);         /* 30px */
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-lg);
+    letter-spacing: var(--letter-spacing-normal);
+    color: var(--color-text-primary);
+    text-transform: uppercase;
+  }
+
+  /* Client name + type */
+  .review-card__info {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .review-card__name {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-md);          /* 18px */
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-lg);
+    letter-spacing: var(--letter-spacing-normal);
+    color: var(--color-text-inverse);
+  }
+
+  .review-card__type {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-md);          /* 18px */
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-lg);
+    letter-spacing: var(--letter-spacing-normal);
+    color: var(--color-text-inverse-muted);
+  }
+</style>

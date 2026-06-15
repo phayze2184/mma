@@ -1,0 +1,97 @@
+---
+import accordionIcon from '../assets/icons/accordion-arrow-down-icon.svg?url';
+
+interface Item {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  items: Item[];
+}
+
+const { items } = Astro.props;
+---
+
+<ul class="accordion" role="list">
+  {items.map(item => (
+    <li>
+      <details class="accordion__item">
+        <summary class="accordion__summary">
+          <span class="accordion__question">{item.question}</span>
+          <img
+            src={accordionIcon}
+            width="24"
+            height="24"
+            alt=""
+            aria-hidden="true"
+            class="accordion__icon"
+          />
+        </summary>
+        <div class="accordion__answer">
+          <p>{item.answer}</p>
+        </div>
+      </details>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .accordion {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .accordion__item {
+    background-color: #f3f1f1;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .accordion__summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .accordion__summary::-webkit-details-marker { display: none; }
+  .accordion__summary::marker               { display: none; }
+
+  .accordion__question {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-md);        /* 18px */
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-lg);    /* 150% */
+    color: var(--color-text-primary);
+  }
+
+  .accordion__icon {
+    flex-shrink: 0;
+    transition: transform 0.25s ease;
+  }
+
+  .accordion__item[open] .accordion__icon {
+    transform: rotate(180deg);
+  }
+
+  .accordion__answer {
+    padding: 0 20px 20px;
+  }
+
+  .accordion__answer p {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-lg);
+    color: var(--color-text-primary-muted);
+  }
+</style>

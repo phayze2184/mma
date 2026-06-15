@@ -1,0 +1,64 @@
+---
+import decorGreen from '../assets/icons/eyebrow-decor-green.svg?url';
+import decorAmber from '../assets/icons/eyebrow-decor-amber.svg?url';
+
+interface Props {
+  mode?: 'on-light' | 'on-dark';
+  mark?: boolean;
+  class?: string;
+}
+
+const {
+  mode = 'on-light',
+  mark = true,
+  class: className,
+} = Astro.props;
+
+const isOnLight = mode === 'on-light';
+---
+
+<div class:list={['eyebrow', `eyebrow--${mode}`, { 'eyebrow--mark': mark }, className]}>
+  {mark && (
+    <span class="eyebrow__decor" aria-hidden="true">
+      <img src={isOnLight ? decorGreen : decorAmber} width="12" height="12" alt="" aria-hidden="true" />
+    </span>
+  )}
+  <span class="eyebrow__text"><slot /></span>
+</div>
+
+<style>
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-gap-tightest); /* 6px */
+  }
+
+  .eyebrow__decor {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 25px;
+    height: 25px;
+    padding: var(--spacing-component-xs); /* 4px */
+    transform: rotate(-45deg);
+  }
+
+  .eyebrow__text {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-lg);
+    letter-spacing: var(--letter-spacing-wider);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  /* --- On Light --- */
+
+  .eyebrow--on-light .eyebrow__text { color: var(--color-text-accent-green); }
+
+  /* --- On Dark --- */
+
+  .eyebrow--on-dark .eyebrow__text  { color: var(--color-text-inverse); }
+</style>

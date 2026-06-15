@@ -1,0 +1,301 @@
+---
+import SectionHeader from '../components/SectionHeader.astro';
+import iconLocation from '../assets/icons/benefits-icon-location.svg?url';
+import iconMedical  from '../assets/icons/benefits-icon-medical.svg?url';
+import iconClients  from '../assets/icons/benefits-icon-clients.svg?url';
+import iconSupport  from '../assets/icons/benefits-icon-support.svg?url';
+import hexDecor     from '../assets/icons/benefits-hex-decor.svg?url';
+import decorAmber   from '../assets/icons/decor-amber-120.svg?url';
+import decorSage    from '../assets/icons/decor-sage-80.svg?url';
+
+const benefits = [
+  {
+    icon: iconLocation,
+    alt: 'Prezență locală',
+    title: 'Prezență locală',
+    description: 'Lucrăm pentru afaceri medicale din Constanța, Tulcea, Călărași, Ialomița, Galați și Brăila.',
+  },
+  {
+    icon: iconMedical,
+    alt: 'Specializare medicală',
+    title: 'Specializare medicală',
+    description: 'Nu suntem o agenție generalistă. Lucrăm exclusiv în domeniul medical și farmaceutic.',
+  },
+  {
+    icon: iconClients,
+    alt: 'Clienți de referință',
+    title: 'Clienți de referință',
+    description: 'Cronos Med, Derma Clinique, Goldmed, Coresth Beauty Med, Dental Med',
+  },
+  {
+    icon: iconSupport,
+    alt: 'Suport dedicat',
+    title: 'Suport dedicat',
+    description: 'Program L–V: 9:00–17:00. Comunicare rapidă și transparentă pe tot parcursul colaborării.',
+  },
+];
+---
+
+<section class="benefits">
+
+  <div class="benefits__inner">
+
+    <!-- ── Left: photo + decors ── -->
+    <div class="benefits__photo-group">
+
+      <div class="benefits__decor benefits__decor--amber" aria-hidden="true">
+        <div class="benefits__decor-center benefits__decor-center--lg">
+          <div class="benefits__decor-rotate">
+            <img src={decorAmber} width="120" height="120" alt="" />
+          </div>
+        </div>
+      </div>
+
+      <div class="benefits__decor benefits__decor--sage" aria-hidden="true">
+        <div class="benefits__decor-center benefits__decor-center--sm">
+          <div class="benefits__decor-rotate">
+            <img src={decorSage} width="80" height="80" alt="" />
+          </div>
+        </div>
+      </div>
+
+      <div class="benefits__photo-wrap" aria-hidden="true">
+        <img
+          src="/benefits-photo.png"
+          alt=""
+          class="benefits__photo"
+          width="450"
+          height="600"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+
+    </div>
+
+    <!-- ── Right: content ── -->
+    <div class="benefits__content">
+
+      <!-- hex wireframe decoration -->
+      <div class="benefits__hex-decor" aria-hidden="true">
+        <img src={hexDecor} width="264" height="264" alt="" />
+      </div>
+
+      <!-- Section header -->
+      <SectionHeader
+        eyebrow="De ce noi"
+        heading="Încredere construită,"
+        headingAccent="prin competență"
+        size="small"
+        mode="on-dark"
+      >
+        Înțelegem regulamentele, sensibilitatea documentelor și ritmul autorităților din Constanța și din regiune.
+      </SectionHeader>
+
+      <!-- Benefits list -->
+      <ul class="benefits__list">
+        {benefits.map(b => (
+          <li class="benefits__item">
+            <div class="benefits__icon-wrap" aria-hidden="true">
+              <img src={b.icon} width="24" height="24" alt="" />
+            </div>
+            <div class="benefits__copy">
+              <p class="benefits__item-title">{b.title}</p>
+              <p class="benefits__item-desc">{b.description}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+
+    </div>
+
+  </div>
+</section>
+
+<style>
+  /* ── Section ── */
+
+  .benefits {
+    background-color: var(--color-bg-surface-green);
+    padding-block: var(--spacing-section-y); /* 120px */
+    position: relative;
+    overflow: hidden;
+    width: 100vw;
+    margin-inline: calc(50% - 50vw);
+  }
+
+  /* ── Corner diamond decorations ── */
+
+  .benefits__decor {
+    position: absolute;
+    top: -55px;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .benefits__decor--amber {
+    right: -60px;
+    z-index: 2;
+  }
+
+  .benefits__decor--sage {
+    right: 20px;
+    z-index: 0;
+  }
+
+  .benefits__decor-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .benefits__decor-center--lg { width: 170px; height: 170px; }
+  .benefits__decor-center--sm { width: 113px; height: 113px; }
+
+  /* Rotation lives here — inner element only, outer container stays axis-aligned */
+  .benefits__decor-rotate {
+    flex: none;
+    line-height: 0;
+  }
+
+  /* ── Inner layout ── */
+
+  .benefits__inner {
+    max-width: var(--size-container-lg); /* 1200px */
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: var(--spacing-page-inline); /* 20px */
+    display: flex;
+    align-items: flex-end;
+    gap: clamp(var(--spacing-10), 8vw, 120px); /* 48px → 120px fluid */
+  }
+
+  /* ── Left: photo group (photo + decors move together) ── */
+
+  .benefits__photo-group {
+    flex-shrink: 0;
+    position: relative;
+    width: min(450px, 40%);
+  }
+
+  .benefits__photo-wrap {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    max-height: 660px;
+    border-radius: var(--radius-card); /* 16px */
+    overflow: hidden;
+    box-shadow: var(--elevation-4);
+  }
+
+  .benefits__photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+  }
+
+  /* ── Right: content ── */
+
+  .benefits__content {
+    flex: 1;
+    min-width: 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-gap-very-loose); /* 48px */
+  }
+
+  /* Hex wireframe in top-right of content area */
+  .benefits__hex-decor {
+    position: absolute;
+    top: -72px;
+    right: -40px;
+    pointer-events: none;
+    user-select: none;
+    opacity: 0.6;
+  }
+
+  /* ── Benefits list ── */
+
+  .benefits__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-8); /* 32px */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .benefits__item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-7); /* 24px */
+  }
+
+  .benefits__icon-wrap {
+    flex-shrink: 0;
+    width: var(--size-control-md);  /* 40px */
+    height: var(--size-control-md); /* 40px */
+    background-color: var(--color-bg-icon-light); /* taupe-300 */
+    border-radius: var(--radius-md); /* 8px */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .benefits__copy {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2); /* 6px */
+  }
+
+  .benefits__item-title {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-md);           /* 18px */
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-base);       /* 100% */
+    letter-spacing: var(--letter-spacing-normal);
+    color: var(--color-text-inverse);
+  }
+
+  .benefits__item-desc {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-sm);           /* 14px */
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-lg);         /* 150% */
+    letter-spacing: var(--letter-spacing-normal);
+    color: var(--color-text-inverse-muted);
+  }
+
+  /* ── Responsive ── */
+
+  @media (max-width: 1024px) {
+    .benefits__hex-decor { display: none; }
+  }
+
+  @media (max-width: 768px) {
+    .benefits {
+      padding-block: var(--spacing-section-x-compact); /* 48px */
+    }
+
+    .benefits__decor { display: none; }
+
+    .benefits__inner {
+      flex-direction: column;
+      align-items: stretch;
+      gap: var(--spacing-gap-very-loose); /* 48px */
+    }
+
+    .benefits__photo-group {
+      width: 100%;
+    }
+
+    .benefits__photo-wrap {
+      aspect-ratio: 4 / 3;
+      max-height: 320px;
+    }
+  }
+</style>

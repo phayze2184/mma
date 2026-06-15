@@ -1,0 +1,39 @@
+---
+import '../styles/variables.css';
+import '../styles/tokens.css';
+import '../styles/typography.css';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Medical Marketing Agency',
+  description = 'Promovare medicală, deschidere cabinete, dosare DSP și listare RX/OTC. Partener de încredere pentru afaceri medicale în Constanța, Tulcea, Galați, Brăila, Călărași, Ialomița.',
+} = Astro.props;
+---
+
+<html lang="ro">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <title>{title}</title>
+
+    <link rel="preload" href="/Jost-VariableFont_wght.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/PlayfairDisplay-VariableFont_wght.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/PlayfairDisplay-Italic-VariableFont_wght.woff2" as="font" type="font/woff2" crossorigin />
+
+    <slot name="head" />
+  </head>
+  <body>
+    <div class="container">
+      <slot />
+    </div>
+  </body>
+</html>

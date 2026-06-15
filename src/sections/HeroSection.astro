@@ -1,0 +1,289 @@
+---
+import Eyebrow  from '../components/Eyebrow.astro';
+import Button   from '../components/Button.astro';
+import HeroCard from '../components/HeroCard.astro';
+---
+
+<section class="hero-section">
+  <div class="hero__inner">
+
+    <!-- ── LEFT ── -->
+    <div class="hero__left">
+
+      <div class="hero__lead">
+        <Eyebrow>Conform GDP &amp; GMP</Eyebrow>
+        <div class="hero__copy">
+          <h1 class="hero__heading">
+            Autorizații medicale, <br/>
+            obținute <em class="hero__heading-accent">rapid</em><em class="hero__heading-period">.</em>
+          </h1>
+          <p class="hero__body">
+            Ne ocupăm de tot dosarul, de la documentație la inspecția DSP, ca tu să te concentrezi pe pacienți. Fără blocaje birocratice,fără costuri ascunse.
+          </p>
+        </div>
+      </div>
+
+      <div class="hero__actions">
+        <div class="hero__btn">
+          <Button href="tel:+40732032351">Solicită o evaluare gratuită</Button>
+        </div>
+        <div class="hero__btn">
+          <Button variant="secondary" href="#process">Vezi cum funcționează</Button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── RIGHT ── -->
+    <div class="hero__right">
+
+      <!-- 1. Large hex — deepest background -->
+      <svg class="hex hex--lg" viewBox="0 0 661 632" fill="none" aria-hidden="true" focusable="false">
+        <path d="M4.94007 375.319C4.02589 374.234 3.75556 372.744 4.22989 371.407L112.444 66.2377C112.893 64.9733 113.943 64.0235 115.232 63.6972L115.494 63.6402L440.563 4.06534C441.975 3.80648 443.418 4.32523 444.343 5.42369L655.306 255.975C656.239 257.082 656.5 258.606 655.99 259.961L655.99 259.962L539.987 567.836C539.491 569.154 538.337 570.113 536.951 570.362L219.75 627.325C218.342 627.578 216.905 627.059 215.983 625.965L108.734 498.589L4.94007 375.319Z" stroke="var(--color-border-soft)" stroke-width="8"/>
+      </svg>
+
+      <!-- 2. Small hex — behind card -->
+      <svg class="hex hex--sm" viewBox="0 0 486.812 486.812" fill="none" aria-hidden="true" focusable="false">
+        <path d="M20.1057 284.977C19.1914 283.891 18.9212 282.401 19.3957 281.063L93.3661 72.4646C93.8444 71.1157 95.007 70.1251 96.4147 69.867L318.657 29.1365C320.07 28.8778 321.513 29.3964 322.438 30.4949L466.639 201.756C467.571 202.863 467.833 204.388 467.322 205.743L388.014 416.229C387.517 417.547 386.364 418.507 384.978 418.756L168.154 457.692C166.745 457.945 165.309 457.427 164.387 456.332L91.0546 369.239L20.1057 284.977Z" stroke="var(--color-border-soft)" stroke-width="8"/>
+      </svg>
+
+      <HeroCard />
+
+      <!-- 3. Small hex — in front of card, clipped to top-right corner only -->
+      <svg class="hex hex--sm hex--front" viewBox="0 0 486.812 486.812" fill="none" aria-hidden="true" focusable="false">
+        <defs>
+          <clipPath id="hex-front-clip">
+            <rect x="259.314" y="22.4223" width="210.028" height="180.51"/>
+          </clipPath>
+        </defs>
+        <path d="M20.1057 284.977C19.1914 283.891 18.9212 282.401 19.3957 281.063L93.3661 72.4646C93.8444 71.1157 95.007 70.1251 96.4147 69.867L318.657 29.1365C320.07 28.8778 321.513 29.3964 322.438 30.4949L466.639 201.756C467.571 202.863 467.833 204.388 467.322 205.743L388.014 416.229C387.517 417.547 386.364 418.507 384.978 418.756L168.154 457.692C166.745 457.945 165.309 457.427 164.387 456.332L91.0546 369.239L20.1057 284.977Z" stroke="var(--color-border-soft)" stroke-width="8" clip-path="url(#hex-front-clip)"/>
+      </svg>
+
+      <div class="hero__nav" aria-hidden="true">
+        <span class="hero__dot hero__dot--active"></span>
+        <span class="hero__dot"></span>
+        <span class="hero__dot"></span>
+      </div>
+
+    </div>
+    <!-- ── /RIGHT ── -->
+
+
+  </div>
+</section>
+
+<style>
+  /* ============================================================
+     HERO SECTION
+     ============================================================ */
+
+  .hero-section {
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    isolation: isolate;
+    overflow-y: clip; /* prevent hex decorations bleeding into next section */
+  }
+
+  .hero__inner {
+    position: relative; /* anchor for absolutely-positioned decorations */
+    flex: 1;
+    max-width: var(--size-container-lg); /* 1200px */
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: var(--spacing-page-inline); /* 20px */
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-11); /* 64px */
+    overflow: visible;
+  }
+
+
+  /* ============================================================
+     LEFT COLUMN
+     ============================================================ */
+
+  .hero__left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-gap-very-loose); /* 48px */
+    padding-block-start: var(--spacing-section-y-compact); /* 64px top room */
+  }
+
+  .hero__lead {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-gap-tight); /* 16px */
+  }
+
+  .hero__copy {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-gap-loose); /* 32px */
+  }
+
+  .hero__heading {
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 1.25rem + 3.333vw, 3.75rem); /* 36px → 60px */
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-display); /* 115% */
+    letter-spacing: var(--letter-spacing-tight);
+    font-style: normal;
+    max-width: 680px;
+  }
+
+  .hero__heading-accent {
+    font-style: italic;
+    color: var(--color-text-accent-green); /* sage-teal */
+  }
+
+  .hero__heading-period {
+    font-style: italic;
+    color: var(--color-text-primary);
+  }
+
+  .hero__body {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-md); /* 18px */
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-lg); /* 150% */
+    letter-spacing: var(--letter-spacing-normal);
+    color: var(--color-text-primary-muted);
+    max-width: 520px;
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-gap-tight); /* 16px */
+    align-items: center;
+  }
+
+  /* Contents wrapper gives Astro-scoped Button a locally-owned parent */
+  .hero__btn { display: contents; }
+
+
+  /* ============================================================
+     RIGHT COLUMN
+     ============================================================ */
+
+  .hero__right {
+    flex-shrink: 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-gap-loose); /* 32px */
+    padding-block: var(--spacing-11) var(--spacing-11); /* 64px */
+    overflow: visible;
+  }
+
+  /* ── Hex decorations ── */
+
+  .hex {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -62%);
+    pointer-events: none;
+    user-select: none;
+    max-width: none; /* override global svg { max-width: 100% } */
+  }
+
+  .hex--lg {
+    width: 650px;
+    height: 570px;
+    transform: translate(-50%, calc(-62% + 12px));
+    z-index: 1;
+  }
+
+  /* sm-back sits behind the card (card has z-index:1) */
+  .hex--sm {
+    width: 487px;
+    height: 487px;
+    z-index: 0;
+  }
+
+  /* sm-front sits in front of the card, clipped to top-right corner */
+  .hex--front {
+    z-index: 2;
+  }
+
+
+
+
+
+
+  /* ============================================================
+     NAV DOTS
+     ============================================================ */
+
+  .hero__nav {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    gap: var(--spacing-4); /* 12px */
+    align-items: center;
+  }
+
+  .hero__dot {
+    width: 20px;
+    height: 20px;
+    border-radius: var(--radius-round);
+    border: 4px solid var(--color-border-default); /* taupe-400 */
+    background: transparent;
+    display: block;
+    flex-shrink: 0;
+  }
+
+  /* Active: taupe-300 fill + taupe-700 border (matches Figma) */
+  .hero__dot--active {
+    background: var(--color-bg-badge);        /* taupe-300 */
+    border-color: var(--color-border-strong); /* taupe-700 */
+  }
+
+
+  /* ============================================================
+     RESPONSIVE
+     ============================================================ */
+
+  @media (max-width: 1024px) {
+    .hero-card { width: 340px; }
+  }
+
+  @media (max-width: 768px) {
+    .hero-section { height: auto; }
+
+    .hero__inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--spacing-gap-very-loose);
+      padding-block-end: 0;
+    }
+
+    .hero__left {
+      padding-block-start: var(--spacing-gap-very-loose); /* 48px */
+    }
+
+    .hero__right {
+      width: 100%;
+      padding-block: var(--spacing-gap-loose) var(--spacing-gap-very-loose);
+    }
+
+    .hero__actions { flex-direction: column; }
+
+    .hex     { transform: translate(-50%, calc(-62% + -6px)); }
+    .hex--lg { transform: translate(-50%, calc(-62% + 12px)); }
+
+  }
+
+  @media (max-width: 480px) {
+    .hero-card {
+      width: 100%; 
+    }
+    .hero__copy {
+      gap: var(--spacing-gap-default); /* 20px */
+    }
+  }
+</style>

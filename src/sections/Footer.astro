@@ -1,0 +1,238 @@
+---
+import footerPattern from '../assets/icons/footer-pattern.svg?url';
+import logomarkFooter from '../assets/icons/logomark-footer.svg?url';
+
+const year = new Date().getFullYear();
+
+const services = [
+  { label: 'Deschidere clinică/cabinet', href: '#servicii' },
+  { label: 'Reprezentare administrativă', href: '#servicii' },
+  { label: 'Strategie de creștere', href: '#servicii' },
+  { label: 'Promovare digitală', href: '#servicii' },
+  { label: 'Website de prezentare', href: '#servicii' },
+  { label: 'Listare produse RX/OTC', href: '#servicii' },
+];
+---
+
+<footer class="footer" style={`--footer-pattern: url("${footerPattern}")`}>
+  <img
+    src={logomarkFooter}
+    width="88"
+    height="88"
+    alt=""
+    class="footer__mark"
+    aria-hidden="true"
+  />
+
+  <div class="footer__inner">
+
+    <!-- Brand + description -->
+    <div class="footer__brand-block">
+      <p class="footer__brand">Medical Marketing Agency</p>
+      <p class="footer__desc">
+        Promovare medicală și suport administrativ pentru clinici și cabinete medicale: <br/>
+        Constanța, Tulcea, Călărași, Ialomița, Galați și Brăila.
+      </p>
+    </div>
+
+    <hr class="footer__divider" />
+
+    <!-- Services -->
+    <nav class="footer__services" aria-label="Servicii">
+      {services.map(s => (
+        <a href={s.href} class="footer__service-link">{s.label}</a>
+      ))}
+    </nav>
+
+    <hr class="footer__divider" />
+
+    <!-- Address / hours / contact -->
+    <div class="footer__info">
+      <span class="footer__info-item">Str. Labirint nr. 35c, Constanța</span>
+      <span class="footer__sep" aria-hidden="true">&middot;</span>
+      <span class="footer__info-item">L-V 09:00-17:00</span>
+      <span class="footer__sep" aria-hidden="true">&middot;</span>
+      <a href="tel:+40732032351" class="footer__info-item footer__info-link">+40 732 032 351</a>
+      <span class="footer__sep" aria-hidden="true">&middot;</span>
+      <a href="mailto:office@medicalmarketingagency.ro" class="footer__info-item footer__info-link">office@medicalmarketingagency.ro</a>
+    </div>
+
+    <!-- Copyright -->
+    <p class="footer__copyright">© {year} Medical Marketing Agency. Toate drepturile rezervate.</p>
+
+  </div>
+</footer>
+
+<style>
+  /* ── Shell ── */
+
+  .footer {
+    background-color: var(--color-bg-surface-dark);
+    color: var(--color-text-inverse);
+    padding-block-start: var(--spacing-section-x);
+    padding-block-end: var(--spacing-section-x-compact);
+    width: 100vw;
+    margin-inline: calc(50% - 50vw);
+    position: relative;
+  }
+
+  .footer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--footer-pattern);
+    background-repeat: repeat;
+    background-size: 60px 60px;
+    background-position: 0 0;
+    opacity: 0.12;
+    pointer-events: none;
+  }
+
+  .footer__mark {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    z-index: 2;
+    width: 88px;
+    height: 88px;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .footer__inner {
+    max-width: var(--size-container-lg);
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: var(--spacing-page-inline);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── Brand ── */
+
+  .footer__brand-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    text-align: center;
+  }
+
+  .footer__brand {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    font-weight: var(--font-weight-regular);
+    line-height: 1.05;
+    color: var(--color-text-inverse);
+  }
+
+  .footer__desc {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: var(--font-weight-regular);
+    line-height: 1.6;
+    color: var(--color-text-inverse-muted);
+    max-width: 560px;
+  }
+
+  /* ── Dividers ── */
+
+  .footer__divider {
+    width: 100%;
+    border: none;
+    border-top: 1px solid rgba(232, 224, 213, 0.2);
+    margin: 0;
+  }
+
+  /* ── Services ── */
+
+  .footer__services {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px 40px;
+  }
+
+  .footer__service-link {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: var(--font-weight-regular);
+    line-height: 1.5;
+    color: var(--color-text-inverse-muted);
+    text-decoration: none;
+  }
+
+  .footer__service-link:hover {
+    color: var(--color-text-inverse);
+  }
+
+  /* ── Info row ── */
+
+  .footer__info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .footer__info-item {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: var(--font-weight-regular);
+    line-height: 1.5;
+    color: var(--color-text-inverse-muted);
+    white-space: nowrap;
+  }
+
+  .footer__sep {
+    font-size: 14px;
+    color: var(--color-text-inverse-muted);
+    opacity: 0.4;
+    padding-inline: 14px;
+  }
+
+  .footer__info-link {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* ── Copyright ── */
+
+  .footer__copyright {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-regular);
+    line-height: 1;
+    color: var(--color-text-inverse-muted);
+    text-align: center;
+    opacity: 0.6;
+  }
+
+  /* ── Responsive ── */
+
+  @media (max-width: 768px) {
+    .footer__services {
+      gap: 12px 24px;
+    }
+
+    .footer__info {
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .footer__sep {
+      display: none;
+    }
+
+    .footer__info-item {
+      white-space: normal;
+      text-align: center;
+    }
+  }
+</style>

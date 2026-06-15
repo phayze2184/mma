@@ -1,0 +1,111 @@
+---
+import Eyebrow from '../components/Eyebrow.astro';
+import iconCheckmark from '../assets/icons/trust-checkmark.svg?url';
+import iconBank      from '../assets/icons/trust-bank.svg?url';
+import iconLicense   from '../assets/icons/trust-license.svg?url';
+import iconDocument  from '../assets/icons/trust-document.svg?url';
+
+const items = [
+  { icon: iconCheckmark, label: 'GDP & GMP' },
+  { icon: iconBank,      label: 'ANMDMR' },
+  { icon: iconLicense,   label: 'Colegiul medicilor' },
+  { icon: iconDocument,  label: 'DSP autorizat' },
+];
+---
+
+<section class="trust">
+  <div class="trust__inner">
+
+    <Eyebrow mode="on-dark">Conformitate & reglementări</Eyebrow>
+
+    <ul class="trust__list" role="list">
+      {items.map(item => (
+        <li class="trust__item">
+          <img src={item.icon} width="24" height="24" alt="" aria-hidden="true" />
+          <span class="trust__label">{item.label}</span>
+        </li>
+      ))}
+    </ul>
+
+  </div>
+</section>
+
+<style>
+  /* ── Section ── */
+
+  .trust {
+    background-color: var(--color-bg-surface-green);
+    padding-block: var(--spacing-section-x-compact); /* 48px */
+    width: 100vw;
+    margin-inline: calc(50% - 50vw);
+  }
+
+  .trust__inner {
+    max-width: var(--size-container-lg); /* 1200px */
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: var(--spacing-page-inline); /* 20px */
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-gap-very-loose); /* 48px */
+  }
+
+  /* ── Trust items row ── */
+
+  .trust__list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .trust__item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-gap-default); /* 20px */
+    padding-inline-end: var(--spacing-component-lg); /* 40px */
+  }
+
+  .trust__item:not(:last-child) {
+    border-inline-end: var(--border-default) solid var(--color-border-default);
+  }
+
+  /* ── Label ── */
+
+  .trust__label {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-xl);           /* 24px */
+    font-weight: var(--font-weight-medium);
+    line-height: 1;
+    letter-spacing: var(--letter-spacing-normal);
+    color: var(--color-text-inverse);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  /* ── Responsive ── */
+
+  @media (max-width: 768px) {
+    .trust__list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-gap-loose); /* 32px */
+    }
+
+    .trust__item {
+      padding-inline-end: 0;
+      border-inline-end: none;
+      gap: var(--spacing-gap-tighter); /* 8px */
+    }
+
+    .trust__label {
+      font-size: var(--font-size-md); /* 18px */
+    }
+    .trust__item:not(:last-child) {
+    border-inline-end: var(--border-default) transparent var(--color-border-default);
+  }
+    
+  }
+</style>

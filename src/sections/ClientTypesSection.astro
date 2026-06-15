@@ -1,0 +1,161 @@
+---
+import Eyebrow from '../components/Eyebrow.astro';
+import decorAmber from '../assets/icons/eyebrow-decor-amber.svg?url';
+
+const clientTypes = [
+  'Cabinete medicale',
+  'Farmacii',
+  'Clinici stomatologice',
+  'Clinici estetice',
+  'Depozite farmaceutice',
+  'Spitale private',
+];
+---
+
+<section class="client-types">
+  <div class="client-types__inner">
+
+    <div class="client-types__eyebrow">
+      <Eyebrow mode="on-dark">Lucrăm pentru:</Eyebrow>
+    </div>
+
+    <div class="client-types__marquee" aria-hidden="true">
+      <!-- track is duplicated so the loop is seamless -->
+      {[0, 1].map(() => (
+        <ul class="client-types__track" role="presentation">
+          {clientTypes.map(label => (
+            <li class="client-types__item">
+              <span class="client-types__decor">
+                <img src={decorAmber} width="12" height="12" alt="" />
+              </span>
+              <span class="client-types__label">{label}</span>
+            </li>
+          ))}
+        </ul>
+      ))}
+      <!-- Figma Decor Blur — soft edge masks -->
+      <div class="client-types__blur client-types__blur--left"  aria-hidden="true"></div>
+      <div class="client-types__blur client-types__blur--right" aria-hidden="true"></div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .client-types {
+    background-color: var(--color-bg-surface-green);
+    padding-block: var(--spacing-section-x-compact);  /* 48px */
+    padding-inline: var(--spacing-section-y-compact); /* 64px */
+    width: 100vw;
+    margin-inline: calc(50% - 50vw);
+    overflow: hidden;
+  }
+
+  .client-types__inner {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-6); /* 20px */
+  }
+
+  .client-types__eyebrow {
+    flex-shrink: 0;
+  }
+
+  /* ── Marquee viewport ── */
+
+  .client-types__marquee {
+    display: flex;          /* row of two tracks */
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    min-width: 0;
+  }
+
+  /* Figma Decor Blur — pill with same bg color + blur masks edges */
+  .client-types__blur {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 99px;
+    height: 75px;
+    background: var(--color-bg-surface-green);
+    filter: blur(11.55px);
+    border-radius: var(--radius-round);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .client-types__blur--left  { left:  -28px; }
+  .client-types__blur--right { right: -28px; }
+
+  /* ── Scrolling track ── */
+
+  .client-types__track {
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 31px;
+    padding-inline-end: 31px; /* keep gap consistent at the seam */
+    animation: marquee 24s linear infinite;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-100%); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .client-types__track { animation: none; }
+  }
+
+  /* ── Single item ── */
+
+  .client-types__item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--spacing-gap-tightest); /* 6px */
+    flex-shrink: 0;
+    list-style: none;
+  }
+
+  .client-types__decor {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 25px;
+    height: 25px;
+    padding: var(--spacing-component-xs); /* 6px */
+    transform: rotate(-45deg);
+  }
+
+  .client-types__label {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-md); /* 18px */
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-lg);
+    letter-spacing: var(--letter-spacing-normal);
+    color: var(--color-text-inverse);
+    white-space: nowrap;
+  }
+
+  /* ── Responsive ── */
+
+  @media (max-width: 768px) {
+    .client-types {
+      padding-inline: var(--spacing-page-inline);
+    }
+
+    .client-types__inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--spacing-gap-tight);
+    }
+
+    .client-types__track { animation-duration: 40s; }
+
+    .client-types__blur { display: none; }
+  }
+</style>

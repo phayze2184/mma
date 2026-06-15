@@ -1,0 +1,286 @@
+---
+import iconDocument from '../assets/icons/hero-card-document-validation.svg?url';
+import iconTimer    from '../assets/icons/hero-card-timer.svg?url';
+import iconComplete from '../assets/icons/hero-card-task-complete.svg?url';
+import iconProgress from '../assets/icons/hero-card-task-inprogress.svg?url';
+---
+
+<div class="hero-card">
+
+  <!-- ── Card Top: header + divider ── -->
+  <div class="hero-card__top">
+    <div class="hero-card__header">
+      <div class="hero-card__doc-icon">
+        <img src={iconDocument} width="24" height="24" alt="" aria-hidden="true" />
+      </div>
+      <div class="hero-card__title">
+        <p class="hero-card__title-main">Dosar #2046</p>
+        <p class="hero-card__title-sub">Clinică stomatologică</p>
+      </div>
+    </div>
+    <hr class="hero-card__divider" />
+  </div>
+
+  <!-- ── Card Bottom: tasks + badge ── -->
+  <div class="hero-card__bottom">
+
+    <ul class="hero-card__tasks" role="list">
+
+      <!-- Complete tasks -->
+      <li class="hero-card__task">
+        <span class="hero-card__task-icon hero-card__task-icon--complete" aria-hidden="true">
+          <img src={iconComplete} width="21" height="21" alt="" aria-hidden="true" />
+        </span>
+        <span class="hero-card__task-label hero-card__task-label--done">Documentație depusă</span>
+      </li>
+      <li class="hero-card__task">
+        <span class="hero-card__task-icon hero-card__task-icon--complete" aria-hidden="true">
+          <img src={iconComplete} width="21" height="21" alt="" aria-hidden="true" />
+        </span>
+        <span class="hero-card__task-label hero-card__task-label--done">Verificare documentație</span>
+      </li>
+      <li class="hero-card__task">
+        <span class="hero-card__task-icon hero-card__task-icon--complete" aria-hidden="true">
+          <img src={iconComplete} width="21" height="21" alt="" aria-hidden="true" />
+        </span>
+        <span class="hero-card__task-label hero-card__task-label--done">Verificare documentație</span>
+      </li>
+
+      <!-- In-progress task -->
+      <li class="hero-card__task">
+        <span class="hero-card__task-icon hero-card__task-icon--inprogress" aria-hidden="true">
+          <img src={iconProgress} width="17" height="17" alt="" aria-hidden="true" />
+        </span>
+        <span class="hero-card__task-label">Inspecție DSP programată</span>
+      </li>
+
+      <!-- Pending task — numbered circle -->
+      <li class="hero-card__task">
+        <span class="hero-card__task-num" aria-label="Pasul 4">4</span>
+        <span class="hero-card__task-label">Autorizație emisă</span>
+      </li>
+
+    </ul>
+
+    <!-- Badge -->
+    <div class="hero-card__badge">
+      <div class="hero-card__timer-icon">
+        <img src={iconTimer} width="24" height="24" alt="" aria-hidden="true" />
+      </div>
+      <p class="hero-card__badge-text">
+        Estimare finalizare: <strong>12 zile</strong>
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<style>
+  /* ============================================================
+     HERO CARD
+     ============================================================ */
+
+  .hero-card {
+    position: relative;
+    z-index: 1;    /* sits between bg hex (z:0) and front hex (z:2) */
+    width: 380px;
+    background: var(--color-bg-elevated-surface); /* taupe-50 */
+    border-radius: var(--radius-card);             /* 16px */
+    padding: var(--spacing-component-lg);          /* 40px */
+    /* Elevation/3 — two-layer shadow from Figma */
+    box-shadow:
+      0  2px  4px  0   oklch(30.7% 0.034 54.8 / 0.06),
+      0  6px 16px -2px  oklch(30.7% 0.034 54.8 / 0.10);
+    display: flex;
+    flex-direction: column;
+    gap: 37px;
+    overflow: clip;
+  }
+
+
+  /* ── Top: header + divider ── */
+
+  .hero-card__top {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4); /* 12px */
+    width: 100%;
+  }
+
+  .hero-card__header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-gap-tight); /* 16px */
+    width: 100%;
+  }
+
+  /* Document icon container */
+  .hero-card__doc-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--color-bg-badge); /* taupe-300 */
+    border-radius: var(--radius-pill); /* 8px */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: clip;
+  }
+
+  .hero-card__title {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+  }
+
+  .hero-card__title-main {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-base); /* 16px */
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-lg); /* 150% */
+    color: var(--color-text-primary);
+  }
+
+  .hero-card__title-sub {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-sm); /* 14px */
+    font-weight: var(--font-weight-regular);
+    line-height: 1;
+    letter-spacing: var(--letter-spacing-normal);
+    color: var(--color-text-primary-muted);
+  }
+
+  .hero-card__divider {
+    border: none;
+    border-top: 1px solid var(--color-border-soft); /* taupe-300 */
+    width: 100%;
+    margin: 0;
+  }
+
+
+  /* ── Bottom: tasks + badge ── */
+
+  .hero-card__bottom {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-7); /* 24px */
+    width: 300px; /* Figma: Card Bottom is 300px (card 380 − 2×40 padding) */
+  }
+
+  .hero-card__tasks {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    width: 221px; /* Figma Tasks container width */
+  }
+
+  .hero-card__task {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-4); /* 12px */
+    height: 38px;
+    flex-shrink: 0;
+  }
+
+  .hero-card__task-icon {
+    flex-shrink: 0;
+  }
+
+  /* Complete: green circle with white checkmark centered inside */
+  .hero-card__task-icon--complete {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-round);
+    background: var(--color-accent-green-default);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: clip;
+  }
+
+  /* In-progress: amber circle with dark border, spinner icon centered inside */
+  .hero-card__task-icon--inprogress {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-round);
+    background: #f0b100;
+    border: 2px solid var(--color-border-strong);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: clip;
+  }
+
+  .hero-card__task-label {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-base); /* 16px */
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-lg);
+    color: var(--color-text-primary);
+    white-space: nowrap;
+  }
+
+  .hero-card__task-label--done {
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-action-primary-default); /* forest #2d4a3e */
+  }
+
+  /* Pending step — numbered dark pill */
+  .hero-card__task-num {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    border-radius: var(--radius-round);
+    background: var(--color-bg-icon-dark); /* taupe-700 #473c39 */
+    color: var(--color-text-inverse);      /* linen #e8e0d5 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-sans);
+    font-size: var(--font-size-xs); /* 12px */
+    font-weight: var(--font-weight-regular);
+    line-height: 1;
+  }
+
+
+  /* ── Badge ── */
+
+  .hero-card__badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: var(--color-bg-badge); /* taupe-300 */
+    border-radius: var(--radius-pill); /* 8px */
+    padding: var(--spacing-4) 20px;   /* 12px 20px */
+    width: 100%;
+    overflow: clip;
+  }
+
+  /* Timer icon — 32×32 container, 24×24 icon centered inside */
+  .hero-card__timer-icon {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: clip;
+    border-radius: var(--radius-pill); /* 8px, matches Figma rounded-md */
+  }
+
+  .hero-card__badge-text {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-sm); /* 14px */
+    font-weight: var(--font-weight-regular);
+    line-height: 1;
+    letter-spacing: var(--letter-spacing-normal);
+    color: var(--color-text-primary);
+    white-space: nowrap;
+  }
+
+  .hero-card__badge-text strong {
+    font-weight: var(--font-weight-semibold);
+  }
+</style>

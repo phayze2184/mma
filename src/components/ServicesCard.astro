@@ -1,0 +1,205 @@
+---
+import arrowIcon from '../assets/icons/services-card-right-arrow.svg?url';
+
+interface Props {
+  number: string;
+  title: string;
+  description: string;
+  pills: string[];
+  placement?: 'top-left' | 'top-middle' | 'top-right' | 'bottom-left' | 'bottom-middle' | 'bottom-right';
+}
+
+const {
+  number,
+  title,
+  description,
+  pills,
+  placement = 'top-left',
+} = Astro.props;
+---
+
+<div class:list={['services-card', `services-card--${placement}`]}>
+
+  <div class="services-card__content">
+
+    <div class="services-card__header">
+      <span class="services-card__number">{number}</span>
+      <div class="services-card__icon" aria-hidden="true">
+        <img src={arrowIcon} width="24" height="24" alt="" />
+      </div>
+    </div>
+
+    <div class="services-card__copy">
+      <p class="services-card__title">{title}</p>
+      <p class="services-card__description">{description}</p>
+    </div>
+
+  </div>
+
+  <div class="services-card__pills" aria-label="Servicii incluse">
+    {pills.map(pill => (
+      <span class="services-card__pill">{pill}</span>
+    ))}
+  </div>
+
+</div>
+
+<style>
+  /* ── Base ── */
+
+  .services-card {
+    background-color: var(--color-bg-surface-light); /* taupe-100 #f3f1f1 */
+    padding: var(--spacing-component-lg);             /* 40px */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--spacing-gap-default); /* 20px min gap between content and pills */
+    min-height: 380px;
+  }
+
+
+  /* ── Placement — borders + corner radii ── */
+
+  .services-card--top-left {
+    border-right:  var(--border-default) solid var(--color-border-default);
+    border-bottom: var(--border-default) solid var(--color-border-default);
+    border-radius: var(--radius-card) 0 0 0;
+  }
+
+  .services-card--top-middle {
+    border-bottom: var(--border-default) solid var(--color-border-default);
+  }
+
+  .services-card--top-right {
+    border-left:   var(--border-default) solid var(--color-border-default);
+    border-bottom: var(--border-default) solid var(--color-border-default);
+    border-radius: 0 var(--radius-card) 0 0;
+  }
+
+  .services-card--bottom-left {
+    border-right: var(--border-default) solid var(--color-border-default);
+    border-radius: 0 0 0 var(--radius-card);
+  }
+
+  /* bottom-middle: no borders, no radius */
+
+  .services-card--bottom-right {
+    border-left: var(--border-default) solid var(--color-border-default);
+    border-radius: 0 0 var(--radius-card) 0;
+  }
+
+
+  /* ── Card content (top block) ── */
+
+  .services-card__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-8); /* 32px */
+    width: 100%;
+  }
+
+  .services-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .services-card__number {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 1.16rem + 1.46vw, 2.25rem); /* 24px → 36px */
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-base);
+    color: var(--color-text-accent-gold); /* warm-gold #c4973b */
+  }
+
+  .services-card__icon {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+
+  /* ── Card copy ── */
+
+  .services-card__copy {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4); /* 12px */
+    width: 100%;
+  }
+
+  .services-card__title {
+    font-family: var(--font-display);
+    font-size: clamp(1.375rem, 1.15rem + 0.97vw, 1.875rem); /* 22px → 30px */
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-lg);
+    letter-spacing: var(--letter-spacing-normal);
+    color: var(--color-text-primary);       /* dark-espresso #3d2b1f */
+    text-transform: uppercase;
+  }
+
+  .services-card__description {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-md);          /* 18px */
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-lg);
+    letter-spacing: var(--letter-spacing-normal);
+    color: var(--color-text-primary-muted);  /* taupe-500 #7c6d67 */
+  }
+
+
+  /* ── Pills (bottom block) ── */
+
+  .services-card__pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 13px;
+    align-items: center;
+  }
+
+  .services-card__pill {
+    background-color: var(--color-bg-badge); /* taupe-300 #d8d2d0 */
+    padding-block: var(--spacing-3);          /* 8px */
+    padding-inline: var(--spacing-4);         /* 12px */
+    border-radius: var(--radius-round);
+    min-width: 50px;
+    text-align: center;
+    font-family: var(--font-sans);
+    font-size: var(--font-size-xs);           /* 12px */
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-lg);
+    letter-spacing: var(--letter-spacing-wide); /* 0.5px */
+    color: var(--color-text-primary);
+    white-space: nowrap;
+  }
+
+
+  /* ── Mobile: single-column separator pattern ── */
+
+  @media (max-width: 768px) {
+    /* Reset all placement-specific borders */
+    .services-card--top-left,
+    .services-card--top-middle,
+    .services-card--top-right,
+    .services-card--bottom-left,
+    .services-card--bottom-middle,
+    .services-card--bottom-right {
+      border: none;
+      border-radius: 0;
+      border-bottom: var(--border-default) solid var(--color-border-default);
+    }
+
+    /* First card: rounded top corners */
+    .services-card--top-left {
+      border-radius: var(--radius-card) var(--radius-card) 0 0;
+    }
+
+    /* Last card: rounded bottom corners, no bottom border */
+    .services-card--bottom-right {
+      border-bottom: none;
+      border-radius: 0 0 var(--radius-card) var(--radius-card);
+    }
+  }
+</style>

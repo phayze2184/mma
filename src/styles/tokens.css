@@ -1,0 +1,101 @@
+/* ============================================================
+   SEMANTIC TOKENS
+   ============================================================ */
+
+:root {
+  /* === Color tokens === */
+
+  /* --- Background --- */
+
+  --color-bg-page:             var(--color-linen);
+  --color-bg-surface-light:    var(--color-taupe-100);
+  --color-bg-elevated-surface: var(--color-taupe-50);
+  --color-bg-surface-green:    var(--color-forest);
+  --color-bg-surface-dark:     var(--color-dark-espresso);
+  --color-bg-badge:            var(--color-taupe-300);
+  --color-bg-icon-dark:        var(--color-taupe-700);
+  --color-bg-icon-light:       var(--color-taupe-300);
+
+
+  /* --- Text --- */
+
+  --color-text-primary:              var(--color-dark-espresso);
+  --color-text-primary-muted:        var(--color-taupe-500);
+  --color-text-inverse:              var(--color-linen);
+  --color-text-inverse-muted:        var(--color-linen-80);
+  --color-text-accent-gold:          var(--color-warm-gold);
+  --color-text-accent-gold-inverse:  var(--color-yellow-500);
+  --color-text-accent-green:         var(--color-sage-teal);
+
+
+
+  /* --- Accent Green --- */
+
+  --color-accent-green-default: var(--color-sage-teal);
+  --color-accent-green-strong:  var(--color-forest);
+  --color-accent-green-soft:    var(--color-green-100);
+  --color-accent-green-ghost:   var(--color-green-50);
+
+
+  /* --- Action Primary --- */
+
+  --color-action-primary-default: var(--color-forest);
+  --color-action-primary-hover:   var(--color-sage-teal);
+  --color-action-primary-active:  var(--color-green-950);
+
+
+  /* --- Border --- */
+
+  --color-border-soft:               var(--color-taupe-300);
+  --color-border-default:            var(--color-taupe-400);
+  --color-border-strong:             var(--color-taupe-700);
+  --color-border-accent-green:       var(--color-sage-teal);
+  --color-border-accent-green-strong:var(--color-forest);
+
+
+  /* --- Action Secondary --- */
+
+  --color-action-secondary-default: var(--color-transparent);
+  --color-action-secondary-hover:   var(--color-green-50);
+  --color-action-secondary-active:  var(--color-green-100);
+
+  /* === Space tokens === */
+
+  /* --- Spacing: Page --- */
+
+  --spacing-page-inline:       var(--spacing-6);   /* 20px  */
+
+
+  /* --- Spacing: Section --- */
+
+  --spacing-section-y:         var(--spacing-14);  /* 120px */
+  --spacing-section-x:         var(--spacing-14);  /* 120px */
+  --spacing-section-y-compact: var(--spacing-11);  /* 64px  */
+  --spacing-section-x-compact: var(--spacing-10);  /* 48px  */
+
+
+  /* --- Spacing: Gap --- */
+  --spacing-gap-tightest: var(--spacing-2);   /* 6px */
+  --spacing-gap-tighter:    var(--spacing-3);   /*  8px */
+  --spacing-gap-tight:      var(--spacing-5);   /* 16px */
+  --spacing-gap-default:    var(--spacing-6);   /* 20px */
+  --spacing-gap-loose:      var(--spacing-8);   /* 32px */
+  --spacing-gap-very-loose: var(--spacing-10);  /* 48px */
+
+
+  /* --- Spacing: Component --- */
+
+  --spacing-component-xs: var(--spacing-2);   /*  4px */
+  --spacing-component-sm: var(--spacing-5);   /* 16px */
+  --spacing-component-md: var(--spacing-7);   /* 24px */
+  --spacing-component-lg: var(--spacing-9);   /* 40px */
+
+
+  /* === Radius tokens === */
+
+  --radius-button:    var(--radius-round); /* 9999px */
+  --radius-card:      var(--radius-xl);    /*   16px */
+  --radius-accordion: var(--radius-lg);    /*   12px */
+  --radius-pill:      var(--radius-md);    /*    8px */
+  --radius-image:     var(--radius-lg);    /*   12px */
+}
