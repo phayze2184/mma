@@ -7,6 +7,7 @@ import iconSupport  from '../assets/icons/benefits-icon-support.svg?url';
 import hexDecor     from '../assets/icons/benefits-hex-decor.svg?url';
 import decorAmber   from '../assets/icons/decor-amber-120.svg?url';
 import decorSage    from '../assets/icons/decor-sage-80.svg?url';
+import benefitsPhoto from '../assets/images/benefits-image.png';
 
 const benefits = [
   {
@@ -61,11 +62,11 @@ const benefits = [
 
       <div class="benefits__photo-wrap" aria-hidden="true">
         <img
-          src="/benefits-photo.png"
+          src={benefitsPhoto.src}
           alt=""
           class="benefits__photo"
-          width="450"
-          height="600"
+          width={benefitsPhoto.width}
+          height={benefitsPhoto.height}
           loading="lazy"
           decoding="async"
         />
