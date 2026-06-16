@@ -52,30 +52,34 @@ const items = [
 
       <!-- Right: image panel + decorative hexes -->
       <div class="qa__right-wrapper">
-        <div class="qa__photo-wrap">
-          <img
-            src={qaImage.src}
-            width={qaImage.width}
-            height={qaImage.height}
-            alt="Consultanță medicală"
-            class="qa__image"
-          />
-        </div>
+        <div class="qa__photo-group">
 
-        <div class="qa__decor qa__decor--amber" aria-hidden="true">
-          <div class="qa__decor-center qa__decor-center--lg">
-            <div class="qa__decor-rotate">
-              <img src={decorAmber} width="120" height="120" alt="" />
+          <div class="qa__decor qa__decor--amber" aria-hidden="true">
+            <div class="qa__decor-center qa__decor-center--lg">
+              <div class="qa__decor-rotate">
+                <img src={decorAmber} width="120" height="120" alt="" />
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="qa__decor qa__decor--sage" aria-hidden="true">
-          <div class="qa__decor-center qa__decor-center--sm">
-            <div class="qa__decor-rotate">
-              <img src={decorSage} width="80" height="80" alt="" />
+          <div class="qa__decor qa__decor--sage" aria-hidden="true">
+            <div class="qa__decor-center qa__decor-center--sm">
+              <div class="qa__decor-rotate">
+                <img src={decorSage} width="80" height="80" alt="" />
+              </div>
             </div>
           </div>
+
+          <div class="qa__photo-wrap">
+            <img
+              src={qaImage.src}
+              width={qaImage.width}
+              height={qaImage.height}
+              alt="Consultanță medicală"
+              class="qa__image"
+            />
+          </div>
+
         </div>
       </div>
     </div>
@@ -105,7 +109,7 @@ const items = [
   .qa__content {
     display: flex;
     gap: var(--spacing-gap-loose); /* 32px */
-    align-items: stretch;
+    align-items: start;
   }
 
   /* ── Left column ── */
@@ -178,6 +182,11 @@ const items = [
 
   /* ── Right image panel + decors ── */
 
+  .qa__photo-group {
+    position: relative;
+    width: 100%;
+  }
+
   .qa__right-wrapper {
     position: relative;
     width: 495px;
@@ -185,10 +194,10 @@ const items = [
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
+    padding-top: 40px;
   }
 
   .qa__photo-wrap {
-    margin-top: auto;
     position: relative;
     z-index: 1;
     width: 100%;
@@ -214,7 +223,7 @@ const items = [
 
   .qa__decor {
     position: absolute;
-    top: 70px;
+    top: -44px;
     pointer-events: none;
     user-select: none;
   }
@@ -250,6 +259,20 @@ const items = [
     line-height: 0;
   }
 
+  /* ── Animation initial states ── */
+
+  .qa__left > *,
+  .qa__right-wrapper {
+    opacity: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .qa__left > *,
+    .qa__right-wrapper {
+      opacity: 1;
+    }
+  }
+
   /* ── Responsive ── */
 
   @media (max-width: 1024px) {
@@ -279,3 +302,21 @@ const items = [
     }
   }
 </style>
+
+<script>
+  import { animate, inView, stagger } from 'motion';
+  import type { DOMKeyframesDefinition } from 'motion';
+
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const fadeUp    = (y: number): DOMKeyframesDefinition => ({ opacity: [0, 1], y: [y, 0] });
+    const slideInRight = (): DOMKeyframesDefinition => ({ opacity: [0, 1], x: [36, 0] });
+
+    inView('.qa__content', () => {
+      const leftItems = [...document.querySelectorAll('.qa__left > *')] as Element[];
+      const image     = document.querySelector('.qa__right-wrapper') as Element;
+
+      animate(leftItems, fadeUp(24), { duration: 0.55, delay: stagger(0.13), ease: 'easeOut' });
+      animate(image, slideInRight(), { duration: 0.7, delay: 0.2, ease: 'easeOut' });
+    }, { amount: 0.2 });
+  }
+</script>

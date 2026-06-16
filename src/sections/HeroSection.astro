@@ -237,12 +237,23 @@ import HeroCard from '../components/HeroCard.astro';
     flex-shrink: 0;
   }
 
-  /* Active: taupe-300 fill + taupe-700 border (matches Figma) */
+  /* Active: taupe-300 fill + taupe-700 border */
   .hero__dot--active {
     background: var(--color-bg-badge);        /* taupe-300 */
     border-color: var(--color-border-strong); /* taupe-700 */
   }
 
+
+  /* ── Animation initial states (JS animates these in) ── */
+
+  .hero__lead > *,
+  .hero__actions {
+    opacity: 0;
+  }
+
+  .hero__right {
+    opacity: 0;
+  }
 
   /* ============================================================
      RESPONSIVE
@@ -280,10 +291,40 @@ import HeroCard from '../components/HeroCard.astro';
 
   @media (max-width: 480px) {
     .hero-card {
-      width: 100%; 
+      width: 100%;
     }
     .hero__copy {
       gap: var(--spacing-gap-default); /* 20px */
     }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__lead > *,
+    .hero__actions,
+    .hero__right {
+      opacity: 1;
+    }
+  }
 </style>
+
+<script>
+  import { animate, stagger } from 'motion';
+  import type { DOMKeyframesDefinition } from 'motion';
+
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const leftItems = [...document.querySelectorAll('.hero__lead > *, .hero__actions')] as Element[];
+    const right     = document.querySelector('.hero__right') as Element;
+    const card      = document.querySelector('.hero-card') as Element;
+
+    const fadeUp = (y: number): DOMKeyframesDefinition => ({ opacity: [0, 1], y: [y, 0] });
+
+    // Left column: staggered entrance (eyebrow → heading+body → CTAs)
+    animate(leftItems, fadeUp(28), { duration: 0.65, delay: stagger(0.14), ease: 'easeOut' });
+
+    // Right column: fade + slide in
+    animate(right, fadeUp(40), { duration: 0.75, delay: 0.18, ease: 'easeOut' });
+
+    // Card: continuous gentle float
+    animate(card, { y: [0, -10, 0] } as DOMKeyframesDefinition, { duration: 4.5, repeat: Infinity, ease: 'easeInOut' });
+  }
+</script>

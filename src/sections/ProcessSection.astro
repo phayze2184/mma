@@ -30,17 +30,19 @@ const steps = [
 <section class="process">
   <div class="process__inner">
 
-    <SectionHeader
-      eyebrow="Procesul nostru"
-      heading="Ce facem,"
-      headingAccent="pe scurt"
-      size="large"
-      mode="on-light"
-    >
-      Acoperim partea administrativă și comunicarea pentru afaceri din sănătate.
-      De la primul dosar la primul pacient, lucrăm într-un limbaj clar:
-      al dumneavoastră, al autorităților și al pacientului.
-    </SectionHeader>
+    <div class="process__header-wrap">
+      <SectionHeader
+        eyebrow="Procesul nostru"
+        heading="Ce facem,"
+        headingAccent="pe scurt"
+        size="large"
+        mode="on-light"
+      >
+        Acoperim partea administrativă și comunicarea pentru afaceri din sănătate.
+        De la primul dosar la primul pacient, lucrăm într-un limbaj clar:
+        al dumneavoastră, al autorităților și al pacientului.
+      </SectionHeader>
+    </div>
 
     <div class="process__steps">
       {steps.map(step => (
@@ -79,6 +81,20 @@ const steps = [
     align-items: flex-start;
   }
 
+  /* ── Animation initial states ── */
+
+  .process__header-wrap,
+  .process__steps > * {
+    opacity: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .process__header-wrap,
+    .process__steps > * {
+      opacity: 1;
+    }
+  }
+
   /* ── Responsive ── */
 
   @media (max-width: 768px) {
@@ -96,3 +112,20 @@ const steps = [
     }
   }
 </style>
+
+<script>
+  import { animate, inView, stagger } from 'motion';
+  import type { DOMKeyframesDefinition } from 'motion';
+
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const fadeUp = (y: number): DOMKeyframesDefinition => ({ opacity: [0, 1], y: [y, 0] });
+
+    inView('.process__inner', () => {
+      const header = document.querySelector('.process__header-wrap') as Element;
+      const cards  = [...document.querySelectorAll('.process__steps > *')] as Element[];
+
+      animate(header, fadeUp(24), { duration: 0.6, ease: 'easeOut' });
+      animate(cards,  fadeUp(36), { duration: 0.55, delay: stagger(0.13, { startDelay: 0.15 }), ease: 'easeOut' });
+    }, { amount: 0.2 });
+  }
+</script>

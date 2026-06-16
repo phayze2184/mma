@@ -271,6 +271,22 @@ const benefits = [
     color: var(--color-text-inverse-muted);
   }
 
+  /* ── Animation initial states ── */
+
+  .benefits__photo-group,
+  .benefits__content > :nth-child(2),
+  .benefits__list > * {
+    opacity: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .benefits__photo-group,
+    .benefits__content > :nth-child(2),
+    .benefits__list > * {
+      opacity: 1;
+    }
+  }
+
   /* ── Responsive ── */
 
   @media (max-width: 1024px) {
@@ -300,3 +316,23 @@ const benefits = [
     }
   }
 </style>
+
+<script>
+  import { animate, inView, stagger } from 'motion';
+  import type { DOMKeyframesDefinition } from 'motion';
+
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const fadeUp  = (y: number): DOMKeyframesDefinition => ({ opacity: [0, 1], y: [y, 0] });
+    const slideIn = (): DOMKeyframesDefinition => ({ opacity: [0, 1], x: [-36, 0] });
+
+    inView('.benefits__inner', () => {
+      const photo  = document.querySelector('.benefits__photo-group') as Element;
+      const header = document.querySelector('.benefits__content > :nth-child(2)') as Element;
+      const items  = [...document.querySelectorAll('.benefits__list > *')] as Element[];
+
+      animate(photo,  slideIn(),  { duration: 0.7, ease: 'easeOut' });
+      animate(header, fadeUp(24), { duration: 0.6, delay: 0.15, ease: 'easeOut' });
+      animate(items,  fadeUp(20), { duration: 0.5, delay: stagger(0.1, { startDelay: 0.3 }), ease: 'easeOut' });
+    }, { amount: 0.2 });
+  }
+</script>

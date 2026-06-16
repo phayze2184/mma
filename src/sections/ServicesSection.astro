@@ -165,6 +165,20 @@ const services = [
   }
 
 
+  /* ── Animation initial states ── */
+
+  .services__header,
+  .services__grid > * {
+    opacity: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .services__header,
+    .services__grid > * {
+      opacity: 1;
+    }
+  }
+
   /* ── Responsive ── */
 
   @media (max-width: 768px) {
@@ -187,6 +201,21 @@ const services = [
       grid-template-columns: 1fr;
     }
   }
-
-
 </style>
+
+<script>
+  import { animate, inView, stagger } from 'motion';
+  import type { DOMKeyframesDefinition } from 'motion';
+
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const fadeUp = (y: number): DOMKeyframesDefinition => ({ opacity: [0, 1], y: [y, 0] });
+
+    inView('.services__inner', () => {
+      const header = document.querySelector('.services__header') as Element;
+      const cards  = [...document.querySelectorAll('.services__grid > *')] as Element[];
+
+      animate(header, fadeUp(24), { duration: 0.55, ease: 'easeOut' });
+      animate(cards,  fadeUp(32), { duration: 0.5, delay: stagger(0.08, { startDelay: 0.2 }), ease: 'easeOut' });
+    }, { amount: 0.15 });
+  }
+</script>

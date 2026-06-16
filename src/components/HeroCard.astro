@@ -39,7 +39,7 @@ import iconProgress from '../assets/icons/hero-card-task-inprogress.svg?url';
         </span>
         <span class="hero-card__task-label hero-card__task-label--done">Verificare documentație</span>
       </li>
-      <li class="hero-card__task">
+      <li class="hero-card__task" style="display:none">
         <span class="hero-card__task-icon hero-card__task-icon--complete" aria-hidden="true">
           <img src={iconComplete} width="21" height="21" alt="" aria-hidden="true" />
         </span>
@@ -55,7 +55,7 @@ import iconProgress from '../assets/icons/hero-card-task-inprogress.svg?url';
       </li>
 
       <!-- Pending task — numbered circle -->
-      <li class="hero-card__task">
+      <li class="hero-card__task" aria-hidden="true">
         <span class="hero-card__task-num" aria-label="Pasul 4">4</span>
         <span class="hero-card__task-label">Autorizație emisă</span>
       </li>
@@ -68,7 +68,7 @@ import iconProgress from '../assets/icons/hero-card-task-inprogress.svg?url';
         <img src={iconTimer} width="24" height="24" alt="" aria-hidden="true" />
       </div>
       <p class="hero-card__badge-text">
-        Estimare finalizare: <strong>12 zile</strong>
+        Estimare finalizare: <strong>15 zile</strong>
       </p>
     </div>
 
