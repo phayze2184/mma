@@ -43,7 +43,14 @@
   --color-action-primary-hover:   var(--color-sage-teal);
   --color-action-primary-active:  var(--color-green-950);
 
+  /* --- Action Secondary --- */
+  --color-action-secondary-default: transparent;
+  --color-action-secondary-hover:   var(--color-green-50);
+  --color-action-secondary-active:  var(--color-green-100);
 
+  /* --- Action Tertiary --- */
+  --color-action-tertiary-default: var(--color-green-50);
+  --color-action-tertiary-hover:   var(--color-green-100);
   /* --- Border --- */
 
   --color-border-soft:               var(--color-taupe-300);

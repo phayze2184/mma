@@ -31,59 +31,63 @@ const items = [
 ---
 
 <section class="qa">
-  <div class="qa__inner">
-    <div class="qa__content">
 
-      <!-- Left: section header + accordion + CTA -->
-      <div class="qa__left">
-        <SectionHeader
-           eyebrow="Întrebări și răspunsuri"
-           heading="Răspunsuri,"
-           headingAccent="fără ocolișuri"
-           size="small"
-           mode="on-dark"
-        >
-          Află cum lucrăm, ce documente sunt necesare și cum te putem sprijini în fiecare etapă.
-        </SectionHeader>
-        <Accordion items={items}/>
-        <Button href="tel:+40732032351" variant="secondary">Discutați cu noi</Button>
+  <!-- Row 1: left text + right photo side-by-side -->
+  <div class="qa__layout">
 
-      </div>
+    <div class="qa__left">
+      <SectionHeader
+         eyebrow="Întrebări și răspunsuri"
+         heading="Răspunsuri,"
+         headingAccent="fără ocolișuri"
+         size="small"
+         mode="on-dark"
+      >
+        Aflați cum lucrăm, ce documente sunt necesare și cum vă putem sprijini în fiecare etapă.
+      </SectionHeader>
+      <Accordion items={items}/>
+    </div>
 
-      <!-- Right: image panel + decorative hexes -->
-      <div class="qa__right-wrapper">
-        <div class="qa__photo-group">
+    <!-- Photo is a direct child of qa__layout — no inner padding constraint -->
+    <div class="qa__right-wrapper">
+      <div class="qa__photo-group">
 
-          <div class="qa__decor qa__decor--amber" aria-hidden="true">
-            <div class="qa__decor-center qa__decor-center--lg">
-              <div class="qa__decor-rotate">
-                <img src={decorAmber} width="120" height="120" alt="" />
-              </div>
+        <div class="qa__decor qa__decor--amber" aria-hidden="true">
+          <div class="qa__decor-center qa__decor-center--lg">
+            <div class="qa__decor-rotate">
+              <img src={decorAmber} width="120" height="120" alt="" />
             </div>
           </div>
-
-          <div class="qa__decor qa__decor--sage" aria-hidden="true">
-            <div class="qa__decor-center qa__decor-center--sm">
-              <div class="qa__decor-rotate">
-                <img src={decorSage} width="80" height="80" alt="" />
-              </div>
-            </div>
-          </div>
-
-          <div class="qa__photo-wrap">
-            <img
-              src={qaImage.src}
-              width={qaImage.width}
-              height={qaImage.height}
-              alt="Consultanță medicală"
-              class="qa__image"
-            />
-          </div>
-
         </div>
+
+        <div class="qa__decor qa__decor--sage" aria-hidden="true">
+          <div class="qa__decor-center qa__decor-center--sm">
+            <div class="qa__decor-rotate">
+              <img src={decorSage} width="80" height="80" alt="" />
+            </div>
+          </div>
+        </div>
+
+        <div class="qa__photo-wrap">
+          <img
+            src={qaImage.src}
+            width={qaImage.width}
+            height={qaImage.height}
+            alt="Consultanță medicală"
+            class="qa__image"
+          />
+        </div>
+
       </div>
     </div>
+
   </div>
+
+  <!-- Row 2: CTA centered -->
+  <div class="qa__cta-wrap">
+    <Button href="tel:+40732032351" variant="tertiary">Discutați cu noi</Button>
+  </div>
+
 </section>
 
 <style>
@@ -97,19 +101,15 @@ const items = [
     overflow: hidden;
   }
 
-  .qa__inner {
+  /* ── Row 1: side-by-side layout ── */
+
+  .qa__layout {
+    display: flex;
+    align-items: start;
+    gap: var(--spacing-gap-loose); /* 32px */
     max-width: var(--size-container-lg); /* 1200px */
-    width: 100%;
     margin-inline: auto;
     padding-inline: var(--spacing-page-inline); /* 20px */
-  }
-
-  /* ── Two-column layout ── */
-
-  .qa__content {
-    display: flex;
-    gap: var(--spacing-gap-loose); /* 32px */
-    align-items: start;
   }
 
   /* ── Left column ── */
@@ -120,6 +120,17 @@ const items = [
     display: flex;
     flex-direction: column;
     gap: var(--spacing-gap-very-loose); /* 48px */
+  }
+
+  /* ── Row 2: CTA centered ── */
+
+  .qa__cta-wrap {
+    display: flex;
+    justify-content: center;
+    padding-block-start: var(--spacing-gap-very-loose); /* 48px */
+    max-width: var(--size-container-lg);
+    margin-inline: auto;
+    padding-inline: var(--spacing-page-inline);
   }
 
   /* ── Section header ── */
@@ -269,14 +280,29 @@ const items = [
       padding-block: var(--spacing-section-x-compact); /* 48px */
     }
 
-    .qa__content {
+    /* Strip layout padding → photo inherits full 100vw width of .qa */
+    .qa__layout {
       flex-direction: column;
-      align-items: stretch;
+      gap: 0;
+      padding-inline: 0;
+      max-width: 100%;
+    }
+
+    /* Restore side padding for text only */
+    .qa__left {
+      padding-inline: var(--spacing-page-inline);
+      padding-block-end: var(--spacing-gap-very-loose);
     }
 
     .qa__right-wrapper {
       width: 100%;
       height: 280px;
+      padding-top: 0;
+      min-height: unset;
+    }
+
+    .qa__photo-wrap {
+      border-radius: 0;
     }
 
     .qa__decor {
@@ -293,7 +319,7 @@ const items = [
     const fadeUp    = (y: number): DOMKeyframesDefinition => ({ opacity: [0, 1], y: [y, 0] });
     const slideInRight = (): DOMKeyframesDefinition => ({ opacity: [0, 1], x: [36, 0] });
 
-    inView('.qa__content', () => {
+    inView('.qa__layout', () => {
       const leftItems = [...document.querySelectorAll('.qa__left > *')] as Element[];
       const image     = document.querySelector('.qa__right-wrapper') as Element;
 

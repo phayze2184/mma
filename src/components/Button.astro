@@ -1,6 +1,8 @@
 ---
+import arrowRight from '../assets/icons/arrow-right-icon.svg?url';
+
 interface Props {
-  variant?: 'primary' | 'secondary' | 'secondary-inverse';
+  variant?: 'primary' | 'secondary' | 'secondary-inverse' | 'tertiary';
   href?: string;
   type?: 'button' | 'submit' | 'reset';
   class?: string;
@@ -14,15 +16,18 @@ const {
 } = Astro.props;
 
 const tag = href ? 'a' : 'button';
+const showArrow = variant === 'tertiary';
 ---
 
 {tag === 'a' ? (
   <a href={href} class:list={['btn', `btn--${variant}`, className]}>
     <slot />
+    {showArrow && <img src={arrowRight} width="24" height="24" alt="" aria-hidden="true" class="btn__arrow" />}
   </a>
 ) : (
   <button type={type} class:list={['btn', `btn--${variant}`, className]}>
     <slot />
+    {showArrow && <img src={arrowRight} width="24" height="24" alt="" aria-hidden="true" class="btn__arrow" />}
   </button>
 )}
 
@@ -78,6 +83,20 @@ const tag = href ? 'a' : 'button';
 
   .btn--secondary-inverse:hover  { background-color: rgba(220, 252, 231, 0.08); }
   .btn--secondary-inverse:active { background-color: rgba(220, 252, 231, 0.15); }
+
+
+  /* --- Tertiary (text + arrow icon, for use on dark backgrounds) --- */
+
+  .btn--tertiary {
+    background-color: transparent;
+    color: var(--color-action-tertiary-default);
+    gap: var(--spacing-gap-tightest); /* 6px between label and arrow */
+    padding-inline: 0;
+  }
+
+  .btn--tertiary:hover{
+    color: var(--color-action-tertiary-hover);
+  }
 
   @media (max-width: 768px) {
     .btn { width: 100%; }
