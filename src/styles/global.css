@@ -63,6 +63,12 @@ p, h1, h2, h3, h4, h5, h6, li {
   padding-inline: var(--spacing-page-inline);
 }
 
+@media (max-width: 768px) {
+  .container {
+    padding-inline: var(--spacing-component-sm); /* 16px */
+  }
+}
+
 .section {
   padding-block: var(--spacing-section-y);
   padding-inline: var(--spacing-section-x);

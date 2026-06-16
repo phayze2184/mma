@@ -24,7 +24,7 @@ const services = [
     aria-hidden="true"
   />
 
-  <div class="footer__inner">
+  <div class="footer__inner container">
 
     <!-- Brand + description -->
     <div class="footer__brand-block">
@@ -108,10 +108,6 @@ const services = [
   }
 
   .footer__inner {
-    max-width: var(--size-container-lg);
-    width: 100%;
-    margin-inline: auto;
-    padding-inline: var(--spacing-page-inline);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -221,7 +217,7 @@ const services = [
     opacity: 0.6;
   }
 
-  .footer__copyright {
+  .footer-text__copyright {
     font-family: var(--font-sans);
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-regular);
@@ -275,6 +271,7 @@ const services = [
     .footer__bottom {
       flex-direction: column;
       gap: 10px;
+      text-align: center;
     }
 
     .footer__sep--legal {

@@ -39,7 +39,7 @@ const benefits = [
 
 <section class="benefits">
 
-  <div class="benefits__inner">
+  <div class="benefits__inner container">
 
     <!-- ── Left: photo + decors ── -->
     <div class="benefits__photo-group">
@@ -161,10 +161,6 @@ const benefits = [
   /* ── Inner layout ── */
 
   .benefits__inner {
-    max-width: var(--size-container-lg); /* 1200px */
-    width: 100%;
-    margin-inline: auto;
-    padding-inline: var(--spacing-page-inline); /* 20px */
     display: flex;
     align-items: flex-end;
     gap: clamp(var(--spacing-10), 8vw, 120px); /* 48px → 120px fluid */

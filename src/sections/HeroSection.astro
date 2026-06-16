@@ -183,12 +183,14 @@ const slides: HeroSlide[] = [
 
   .hero__slider {
     display: grid;
+    grid-template-columns: minmax(0, 1fr); /* constrain column to available width; prevents content overflow */
     flex: 1;
     min-height: 0;
   }
 
   .hero__slide {
     grid-area: 1 / 1;
+    min-width: 0; /* allow slide to shrink below its content min-size */
     display: flex;
     flex-direction: column;
     opacity: 0;          /* Motion One animates this; CSS value = resting state */
@@ -373,7 +375,7 @@ const slides: HeroSlide[] = [
       flex-direction: column;
       align-items: stretch;
       gap: var(--spacing-gap-very-loose);
-      padding-inline: 0; /* container (.container) already provides 20px each side */
+      padding-inline: 0; /* layout .container provides 16px on mobile */
       padding-block-end: 0;
     }
 

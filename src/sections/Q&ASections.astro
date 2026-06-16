@@ -33,7 +33,7 @@ const items = [
 <section class="qa">
 
   <!-- Row 1: left text + right photo side-by-side -->
-  <div class="qa__layout">
+  <div class="qa__layout container">
 
     <div class="qa__left">
       <SectionHeader
@@ -84,7 +84,7 @@ const items = [
   </div>
 
   <!-- Row 2: CTA centered -->
-  <div class="qa__cta-wrap">
+  <div class="qa__cta-wrap container">
     <Button href="tel:+40732032351" variant="tertiary">Discutați cu noi</Button>
   </div>
 
@@ -107,9 +107,6 @@ const items = [
     display: flex;
     align-items: start;
     gap: var(--spacing-gap-loose); /* 32px */
-    max-width: var(--size-container-lg); /* 1200px */
-    margin-inline: auto;
-    padding-inline: var(--spacing-page-inline); /* 20px */
   }
 
   /* ── Left column ── */
@@ -128,9 +125,6 @@ const items = [
     display: flex;
     justify-content: center;
     padding-block-start: var(--spacing-gap-very-loose); /* 48px */
-    max-width: var(--size-container-lg);
-    margin-inline: auto;
-    padding-inline: var(--spacing-page-inline);
   }
 
   /* ── Section header ── */
@@ -290,7 +284,7 @@ const items = [
 
     /* Restore side padding for text only */
     .qa__left {
-      padding-inline: var(--spacing-page-inline);
+      padding-inline: var(--spacing-component-sm); /* 16px — matches mobile container padding */
       padding-block-end: var(--spacing-gap-very-loose);
     }
 
