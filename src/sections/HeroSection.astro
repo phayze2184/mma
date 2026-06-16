@@ -252,7 +252,7 @@ const slides: HeroSlide[] = [
 
   .hero__heading-accent {
     font-style: italic;
-    color: var(--color-text-accent-green); /* sage-teal */
+    color: var(--color-text-accent-gold); /* sage-teal */
   }
 
   .hero__heading-period {
@@ -378,12 +378,18 @@ const slides: HeroSlide[] = [
 
     .hero__left {
       padding-block-start: var(--spacing-gap-very-loose); /* 48px */
-      align-items: center;
       text-align: center;
+      /* align-items stays stretch so children fill full width */
     }
 
+    /* Center only the Eyebrow (inline-flex) within its flex column parent */
     .hero__lead {
       align-items: center;
+    }
+
+    /* Prevent .hero__copy from collapsing when its parent uses align-items:center */
+    .hero__copy {
+      width: 100%;
     }
 
     .hero__heading,
