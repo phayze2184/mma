@@ -378,14 +378,29 @@ const slides: HeroSlide[] = [
 
     .hero__left {
       padding-block-start: var(--spacing-gap-very-loose); /* 48px */
+      align-items: center;
+      text-align: center;
+    }
+
+    .hero__lead {
+      align-items: center;
+    }
+
+    .hero__heading,
+    .hero__body {
+      max-width: 100%;
     }
 
     .hero__right {
       width: 100%;
       padding-block: var(--spacing-gap-loose) var(--spacing-gap-very-loose);
+      align-items: center;
     }
 
-    .hero__actions { flex-direction: column; }
+    .hero__actions {
+      flex-direction: column;
+      width: 100%;
+    }
 
     .hex { display: none; }
   }
