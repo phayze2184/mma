@@ -177,8 +177,6 @@ const slides: HeroSlide[] = [
     flex-direction: column;
     isolation: isolate;
     overflow-y: clip; /* prevent hex decorations bleeding into next section */
-    width: 100vw;
-    margin-inline: calc(50% - 50vw);
   }
 
   /* ── Slider: stacks all slides in the same grid cell ── */
@@ -375,13 +373,13 @@ const slides: HeroSlide[] = [
       flex-direction: column;
       align-items: stretch;
       gap: var(--spacing-gap-very-loose);
+      padding-inline: 0; /* container (.container) already provides 20px each side */
       padding-block-end: 0;
     }
 
     .hero__left {
       padding-block-start: var(--spacing-gap-very-loose); /* 48px */
       text-align: center;
-      /* align-items stays stretch so children fill full width */
     }
 
     /* Center only the Eyebrow (inline-flex) within its flex column parent */
@@ -407,6 +405,7 @@ const slides: HeroSlide[] = [
 
     .hero__actions {
       flex-direction: column;
+      align-items: stretch; /* override desktop align-items:center so buttons fill the row */
       width: 100%;
     }
 
