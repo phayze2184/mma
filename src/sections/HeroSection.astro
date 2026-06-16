@@ -2,74 +2,168 @@
 import Eyebrow  from '../components/Eyebrow.astro';
 import Button   from '../components/Button.astro';
 import HeroCard from '../components/HeroCard.astro';
+
+type TaskStatus = 'complete' | 'inprogress' | 'pending';
+
+interface SlideCard {
+  caseNumber:  string;
+  caseType:    string;
+  tasks: Array<{ label: string; status: TaskStatus; hidden?: boolean }>;
+  badgeLabel:  string;
+  badgeValue:  string;
+}
+
+interface HeroSlide {
+  eyebrow:          string;
+  headingLine1:     string;
+  headingLine2Pre?: string; /* optional word(s) before the accent on line 2, with trailing space */
+  headingAccent:    string;
+  body:             string;
+  card:             SlideCard;
+}
+
+const slides: HeroSlide[] = [
+  {
+    eyebrow:         'Conform GDP & GMP',
+    headingLine1:    'Autorizații medicale,',
+    headingLine2Pre: 'obținute ',
+    headingAccent:   'rapid',
+    body:            'Ne ocupăm de tot dosarul, de la documentație la inspecția DSP, ca tu să te concentrezi pe pacienți. Fără blocaje birocratice, fără costuri ascunse.',
+    card: {
+      caseNumber:  'Dosar #2046',
+      caseType:    'Clinică stomatologică',
+      tasks: [
+        { label: 'Documentație depusă',      status: 'complete'   },
+        { label: 'Verificare documentație',  status: 'complete'   },
+        { label: 'Inspecție DSP programată', status: 'inprogress' },
+        { label: 'Autorizație emisă',        status: 'pending',   hidden: true },
+      ],
+      badgeLabel: 'Estimare finalizare:',
+      badgeValue: '15 zile',
+    },
+  },
+  {
+    eyebrow:       'Google Ads, Meta, SEO Local',
+    headingLine1:  'Pacienți noi, aduși',
+    headingAccent: 'predictibil',
+    body:          'Campanii Google, Meta și SEO local construite pentru clinici și cabinete, conforme cu regulile de publicitate medicală. Tu te ocupi de pacienți, noi de programări.',
+    card: {
+      caseNumber:  'Campanie #756',
+      caseType:    'Clinică stomatologică',
+      tasks: [
+        { label: 'Audit și strategie',    status: 'complete'   },
+        { label: 'Campanii live',          status: 'complete'   },
+        { label: 'Optimizare în curs',    status: 'inprogress' },
+        { label: 'Raport final publicat', status: 'pending',   hidden: true },
+      ],
+      badgeLabel: 'Programări:',
+      badgeValue: '+125%',
+    },
+  },
+  {
+    eyebrow:       'Conformitate RX/OTC',
+    headingLine1:  'Depozitare,',
+    headingAccent: 'în siguranță',
+    body:          'Coordonare, depozitare și manipulare a medicamentelor conform standardelor europene. Trasabilitate completă, condiții controlate și documentație pregătită pentru inspecție.',
+    card: {
+      caseNumber:  'Depozit #04',
+      caseType:    'Depozit farmaceutic',
+      tasks: [
+        { label: 'Evaluare documentație',   status: 'complete'   },
+        { label: 'Verificare conformitate', status: 'complete'   },
+        { label: 'Pregătire dosar listare', status: 'inprogress' },
+        { label: 'Publicare produs activ',  status: 'pending',   hidden: true },
+      ],
+      badgeLabel: 'Confirmare în:',
+      badgeValue: '12 zile',
+    },
+  },
+];
 ---
 
 <section class="hero-section">
-  <div class="hero__inner">
 
-    <!-- ── LEFT ── -->
-    <div class="hero__left">
+  <!-- ── SLIDER ── -->
+  <div class="hero__slider">
+    {slides.map((slide, i) => (
+      <div
+        class:list={['hero__slide', i === 0 && 'hero__slide--active']}
+        aria-hidden={i !== 0 ? 'true' : undefined}
+      >
+        <div class="hero__inner">
 
-      <div class="hero__lead">
-        <Eyebrow>Conform GDP &amp; GMP</Eyebrow>
-        <div class="hero__copy">
-          <h1 class="hero__heading">
-            Autorizații medicale, <br/>
-            obținute <em class="hero__heading-accent">rapid</em><em class="hero__heading-period">.</em>
-          </h1>
-          <p class="hero__body">
-            Ne ocupăm de tot dosarul, de la documentație la inspecția DSP, ca tu să te concentrezi pe pacienți. Fără blocaje birocratice,fără costuri ascunse.
-          </p>
+          <!-- LEFT -->
+          <div class="hero__left">
+            <div class="hero__lead">
+              <Eyebrow>{slide.eyebrow}</Eyebrow>
+              <div class="hero__copy">
+                <h1 class="hero__heading">
+                  {slide.headingLine1}<br/>
+                  {slide.headingLine2Pre}<em class="hero__heading-accent">{slide.headingAccent}</em><em class="hero__heading-period">.</em>
+                </h1>
+                <p class="hero__body">{slide.body}</p>
+              </div>
+            </div>
+            <div class="hero__actions">
+              <div class="hero__btn">
+                <Button href="tel:+40732032351">Solicită o evaluare gratuită</Button>
+              </div>
+              <div class="hero__btn">
+                <Button variant="secondary" href="#process">Vezi cum funcționează</Button>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT -->
+          <div class="hero__right">
+
+            <!-- 1. Large hex — deepest background -->
+            <svg class="hex hex--lg" viewBox="0 0 661 632" fill="none" aria-hidden="true" focusable="false">
+              <path d="M4.94007 375.319C4.02589 374.234 3.75556 372.744 4.22989 371.407L112.444 66.2377C112.893 64.9733 113.943 64.0235 115.232 63.6972L115.494 63.6402L440.563 4.06534C441.975 3.80648 443.418 4.32523 444.343 5.42369L655.306 255.975C656.239 257.082 656.5 258.606 655.99 259.961L655.99 259.962L539.987 567.836C539.491 569.154 538.337 570.113 536.951 570.362L219.75 627.325C218.342 627.578 216.905 627.059 215.983 625.965L108.734 498.589L4.94007 375.319Z" stroke="var(--color-border-soft)" stroke-width="8"/>
+            </svg>
+
+            <!-- 2. Small hex — behind card -->
+            <svg class="hex hex--sm" viewBox="0 0 486.812 486.812" fill="none" aria-hidden="true" focusable="false">
+              <path d="M20.1057 284.977C19.1914 283.891 18.9212 282.401 19.3957 281.063L93.3661 72.4646C93.8444 71.1157 95.007 70.1251 96.4147 69.867L318.657 29.1365C320.07 28.8778 321.513 29.3964 322.438 30.4949L466.639 201.756C467.571 202.863 467.833 204.388 467.322 205.743L388.014 416.229C387.517 417.547 386.364 418.507 384.978 418.756L168.154 457.692C166.745 457.945 165.309 457.427 164.387 456.332L91.0546 369.239L20.1057 284.977Z" stroke="var(--color-border-soft)" stroke-width="8"/>
+            </svg>
+
+            <HeroCard
+              caseNumber={slide.card.caseNumber}
+              caseType={slide.card.caseType}
+              tasks={slide.card.tasks}
+              badgeLabel={slide.card.badgeLabel}
+              badgeValue={slide.card.badgeValue}
+            />
+
+            <!-- 3. Small hex — in front of card, clipped to top-right corner only -->
+            <svg class="hex hex--sm hex--front" viewBox="0 0 486.812 486.812" fill="none" aria-hidden="true" focusable="false">
+              <defs>
+                <clipPath id={`hex-front-clip-${i}`}>
+                  <rect x="259.314" y="22.4223" width="210.028" height="180.51"/>
+                </clipPath>
+              </defs>
+              <path d="M20.1057 284.977C19.1914 283.891 18.9212 282.401 19.3957 281.063L93.3661 72.4646C93.8444 71.1157 95.007 70.1251 96.4147 69.867L318.657 29.1365C320.07 28.8778 321.513 29.3964 322.438 30.4949L466.639 201.756C467.571 202.863 467.833 204.388 467.322 205.743L388.014 416.229C387.517 417.547 386.364 418.507 384.978 418.756L168.154 457.692C166.745 457.945 165.309 457.427 164.387 456.332L91.0546 369.239L20.1057 284.977Z" stroke="var(--color-border-soft)" stroke-width="8" clip-path={`url(#hex-front-clip-${i})`}/>
+            </svg>
+
+            <!-- Nav dots — one set per slide, synced via JS -->
+            <div class="hero__nav" role="tablist" aria-label="Navigare slide-uri">
+              {slides.map((_, j) => (
+                <button
+                  class:list={['hero__dot', j === 0 && 'hero__dot--active']}
+                  role="tab"
+                  aria-label={`Slide ${j + 1}`}
+                  aria-selected={j === 0 ? 'true' : 'false'}
+                />
+              ))}
+            </div>
+
+          </div>
+
         </div>
       </div>
-
-      <div class="hero__actions">
-        <div class="hero__btn">
-          <Button href="tel:+40732032351">Solicită o evaluare gratuită</Button>
-        </div>
-        <div class="hero__btn">
-          <Button variant="secondary" href="#process">Vezi cum funcționează</Button>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- ── RIGHT ── -->
-    <div class="hero__right">
-
-      <!-- 1. Large hex — deepest background -->
-      <svg class="hex hex--lg" viewBox="0 0 661 632" fill="none" aria-hidden="true" focusable="false">
-        <path d="M4.94007 375.319C4.02589 374.234 3.75556 372.744 4.22989 371.407L112.444 66.2377C112.893 64.9733 113.943 64.0235 115.232 63.6972L115.494 63.6402L440.563 4.06534C441.975 3.80648 443.418 4.32523 444.343 5.42369L655.306 255.975C656.239 257.082 656.5 258.606 655.99 259.961L655.99 259.962L539.987 567.836C539.491 569.154 538.337 570.113 536.951 570.362L219.75 627.325C218.342 627.578 216.905 627.059 215.983 625.965L108.734 498.589L4.94007 375.319Z" stroke="var(--color-border-soft)" stroke-width="8"/>
-      </svg>
-
-      <!-- 2. Small hex — behind card -->
-      <svg class="hex hex--sm" viewBox="0 0 486.812 486.812" fill="none" aria-hidden="true" focusable="false">
-        <path d="M20.1057 284.977C19.1914 283.891 18.9212 282.401 19.3957 281.063L93.3661 72.4646C93.8444 71.1157 95.007 70.1251 96.4147 69.867L318.657 29.1365C320.07 28.8778 321.513 29.3964 322.438 30.4949L466.639 201.756C467.571 202.863 467.833 204.388 467.322 205.743L388.014 416.229C387.517 417.547 386.364 418.507 384.978 418.756L168.154 457.692C166.745 457.945 165.309 457.427 164.387 456.332L91.0546 369.239L20.1057 284.977Z" stroke="var(--color-border-soft)" stroke-width="8"/>
-      </svg>
-
-      <HeroCard />
-
-      <!-- 3. Small hex — in front of card, clipped to top-right corner only -->
-      <svg class="hex hex--sm hex--front" viewBox="0 0 486.812 486.812" fill="none" aria-hidden="true" focusable="false">
-        <defs>
-          <clipPath id="hex-front-clip">
-            <rect x="259.314" y="22.4223" width="210.028" height="180.51"/>
-          </clipPath>
-        </defs>
-        <path d="M20.1057 284.977C19.1914 283.891 18.9212 282.401 19.3957 281.063L93.3661 72.4646C93.8444 71.1157 95.007 70.1251 96.4147 69.867L318.657 29.1365C320.07 28.8778 321.513 29.3964 322.438 30.4949L466.639 201.756C467.571 202.863 467.833 204.388 467.322 205.743L388.014 416.229C387.517 417.547 386.364 418.507 384.978 418.756L168.154 457.692C166.745 457.945 165.309 457.427 164.387 456.332L91.0546 369.239L20.1057 284.977Z" stroke="var(--color-border-soft)" stroke-width="8" clip-path="url(#hex-front-clip)"/>
-      </svg>
-
-      <div class="hero__nav" aria-hidden="true">
-        <span class="hero__dot hero__dot--active"></span>
-        <span class="hero__dot"></span>
-        <span class="hero__dot"></span>
-      </div>
-
-    </div>
-    <!-- ── /RIGHT ── -->
-
-
+    ))}
   </div>
+
 </section>
 
 <style>
@@ -84,6 +178,29 @@ import HeroCard from '../components/HeroCard.astro';
     isolation: isolate;
     overflow-y: clip; /* prevent hex decorations bleeding into next section */
   }
+
+  /* ── Slider: stacks all slides in the same grid cell ── */
+
+  .hero__slider {
+    display: grid;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .hero__slide {
+    grid-area: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;          /* Motion One animates this; CSS value = resting state */
+    pointer-events: none;
+  }
+
+  .hero__slide--active {
+    opacity: 1;          /* initial load / reduced-motion fallback */
+    pointer-events: auto;
+  }
+
+  /* ── Inner two-column layout ── */
 
   .hero__inner {
     position: relative; /* anchor for absolutely-positioned decorations */
@@ -211,10 +328,6 @@ import HeroCard from '../components/HeroCard.astro';
   }
 
 
-
-
-
-
   /* ============================================================
      NAV DOTS
      ============================================================ */
@@ -233,7 +346,8 @@ import HeroCard from '../components/HeroCard.astro';
     border-radius: var(--radius-round);
     border: 4px solid var(--color-border-default); /* taupe-400 */
     background: transparent;
-    display: block;
+    cursor: pointer;
+    padding: 0;
     flex-shrink: 0;
   }
 
@@ -243,17 +357,6 @@ import HeroCard from '../components/HeroCard.astro';
     border-color: var(--color-border-strong); /* taupe-700 */
   }
 
-
-  /* ── Animation initial states (JS animates these in) ── */
-
-  .hero__lead > *,
-  .hero__actions {
-    opacity: 0;
-  }
-
-  .hero__right {
-    opacity: 0;
-  }
 
   /* ============================================================
      RESPONSIVE
@@ -285,7 +388,6 @@ import HeroCard from '../components/HeroCard.astro';
     .hero__actions { flex-direction: column; }
 
     .hex { display: none; }
-
   }
 
   @media (max-width: 480px) {
@@ -296,34 +398,98 @@ import HeroCard from '../components/HeroCard.astro';
       gap: var(--spacing-gap-default); /* 20px */
     }
   }
-
-  @media (prefers-reduced-motion: reduce) {
-    .hero__lead > *,
-    .hero__actions,
-    .hero__right {
-      opacity: 1;
-    }
-  }
 </style>
 
 <script>
-  import { animate, stagger } from 'motion';
+  import { animate } from 'motion';
   import type { DOMKeyframesDefinition } from 'motion';
 
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const leftItems = [...document.querySelectorAll('.hero__lead > *, .hero__actions')] as Element[];
-    const right     = document.querySelector('.hero__right') as Element;
-    const card      = document.querySelector('.hero-card') as Element;
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    const fadeUp = (y: number): DOMKeyframesDefinition => ({ opacity: [0, 1], y: [y, 0] });
+  /* ── Slider ── */
 
-    // Left column: staggered entrance (eyebrow → heading+body → CTAs)
-    animate(leftItems, fadeUp(28), { duration: 0.65, delay: stagger(0.14), ease: 'easeOut' });
+  const heroSlides = [...document.querySelectorAll<HTMLElement>('.hero__slide')];
+  let current = 0;
+  let autoTimer: number;
+  let isTransitioning = false;
 
-    // Right column: fade + slide in
-    animate(right, fadeUp(40), { duration: 0.75, delay: 0.18, ease: 'easeOut' });
+  function syncDots(n: number): void {
+    heroSlides.forEach(slide => {
+      slide.querySelectorAll<HTMLElement>('.hero__dot').forEach((dot, j) => {
+        const active = j === n;
+        dot.classList.toggle('hero__dot--active', active);
+        dot.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+    });
+  }
 
-    // Card: continuous gentle float
-    animate(card, { y: [0, -10, 0] } as DOMKeyframesDefinition, { duration: 4.5, repeat: Infinity, ease: 'easeInOut' });
+  function gotoSlide(n: number): void {
+    if (n === current || isTransitioning) return;
+
+    const outSlide = heroSlides[current];
+    const inSlide  = heroSlides[n];
+
+    /* Update ARIA / pointer-events immediately */
+    outSlide.classList.remove('hero__slide--active');
+    outSlide.setAttribute('aria-hidden', 'true');
+    inSlide.classList.add('hero__slide--active');
+    inSlide.removeAttribute('aria-hidden');
+    current = n;
+    syncDots(n);
+
+    if (prefersReducedMotion) return; /* CSS handles instant opacity change */
+
+    isTransitioning = true;
+
+    /* Fade out departing slide */
+    animate(
+      outSlide,
+      { opacity: [1, 0] } as DOMKeyframesDefinition,
+      { duration: 0.45, ease: 'easeIn' }
+    );
+
+    /* Fade in arriving slide */
+    animate(
+      inSlide,
+      { opacity: [0, 1] } as DOMKeyframesDefinition,
+      { duration: 0.65, ease: 'easeOut' }
+    ).finished.then(() => { isTransitioning = false; });
+
+    /* Subtle upward drift on the left column text */
+    const left = inSlide.querySelector<HTMLElement>('.hero__left');
+    if (left) {
+      animate(
+        left as Element,
+        { y: [22, 0] } as DOMKeyframesDefinition,
+        { duration: 0.55, ease: 'easeOut' }
+      );
+    }
+  }
+
+  function resetTimer(): void {
+    clearInterval(autoTimer);
+    autoTimer = window.setInterval(() => gotoSlide((current + 1) % heroSlides.length), 5000);
+  }
+
+  heroSlides.forEach(slide => {
+    slide.querySelectorAll<HTMLButtonElement>('.hero__dot').forEach((dot, j) => {
+      dot.addEventListener('click', () => {
+        gotoSlide(j);
+        resetTimer();
+      });
+    });
+  });
+
+  resetTimer();
+
+  /* ── Card float ── */
+
+  if (!prefersReducedMotion) {
+    const cards = [...document.querySelectorAll('.hero-card')] as Element[];
+    animate(
+      cards,
+      { y: [0, -10, 0] } as DOMKeyframesDefinition,
+      { duration: 4.5, repeat: Infinity, ease: 'easeInOut' }
+    );
   }
 </script>

@@ -3,6 +3,22 @@ import iconDocument from '../assets/icons/hero-card-document-validation.svg?url'
 import iconTimer    from '../assets/icons/hero-card-timer.svg?url';
 import iconComplete from '../assets/icons/hero-card-task-complete.svg?url';
 import iconProgress from '../assets/icons/hero-card-task-inprogress.svg?url';
+
+interface Task {
+  label:   string;
+  status:  'complete' | 'inprogress' | 'pending';
+  hidden?: boolean;
+}
+
+interface Props {
+  caseNumber:  string;
+  caseType:    string;
+  tasks:       Task[];
+  badgeLabel:  string;
+  badgeValue:  string;
+}
+
+const { caseNumber, caseType, tasks, badgeLabel, badgeValue } = Astro.props;
 ---
 
 <div class="hero-card">
@@ -14,8 +30,8 @@ import iconProgress from '../assets/icons/hero-card-task-inprogress.svg?url';
         <img src={iconDocument} width="24" height="24" alt="" aria-hidden="true" />
       </div>
       <div class="hero-card__title">
-        <p class="hero-card__title-main">Dosar #2046</p>
-        <p class="hero-card__title-sub">Clinică stomatologică</p>
+        <p class="hero-card__title-main">{caseNumber}</p>
+        <p class="hero-card__title-sub">{caseType}</p>
       </div>
     </div>
     <hr class="hero-card__divider" />
@@ -25,41 +41,30 @@ import iconProgress from '../assets/icons/hero-card-task-inprogress.svg?url';
   <div class="hero-card__bottom">
 
     <ul class="hero-card__tasks" role="list">
-
-      <!-- Complete tasks -->
-      <li class="hero-card__task">
-        <span class="hero-card__task-icon hero-card__task-icon--complete" aria-hidden="true">
-          <img src={iconComplete} width="21" height="21" alt="" aria-hidden="true" />
-        </span>
-        <span class="hero-card__task-label hero-card__task-label--done">Documentație depusă</span>
-      </li>
-      <li class="hero-card__task">
-        <span class="hero-card__task-icon hero-card__task-icon--complete" aria-hidden="true">
-          <img src={iconComplete} width="21" height="21" alt="" aria-hidden="true" />
-        </span>
-        <span class="hero-card__task-label hero-card__task-label--done">Verificare documentație</span>
-      </li>
-      <li class="hero-card__task" style="display:none">
-        <span class="hero-card__task-icon hero-card__task-icon--complete" aria-hidden="true">
-          <img src={iconComplete} width="21" height="21" alt="" aria-hidden="true" />
-        </span>
-        <span class="hero-card__task-label hero-card__task-label--done">Verificare documentație</span>
-      </li>
-
-      <!-- In-progress task -->
-      <li class="hero-card__task">
-        <span class="hero-card__task-icon hero-card__task-icon--inprogress" aria-hidden="true">
-          <img src={iconProgress} width="17" height="17" alt="" aria-hidden="true" />
-        </span>
-        <span class="hero-card__task-label">Inspecție DSP programată</span>
-      </li>
-
-      <!-- Pending task — numbered circle -->
-      <li class="hero-card__task" aria-hidden="true">
-        <span class="hero-card__task-num" aria-label="Pasul 4">4</span>
-        <span class="hero-card__task-label">Autorizație emisă</span>
-      </li>
-
+      {tasks.map((task, i) => (
+        <li
+          class="hero-card__task"
+          style={task.hidden ? 'display:none' : undefined}
+          aria-hidden={task.hidden ? 'true' : undefined}
+        >
+          {task.status === 'complete' && (
+            <span class="hero-card__task-icon hero-card__task-icon--complete" aria-hidden="true">
+              <img src={iconComplete} width="21" height="21" alt="" aria-hidden="true" />
+            </span>
+          )}
+          {task.status === 'inprogress' && (
+            <span class="hero-card__task-icon hero-card__task-icon--inprogress" aria-hidden="true">
+              <img src={iconProgress} width="17" height="17" alt="" aria-hidden="true" />
+            </span>
+          )}
+          {task.status === 'pending' && (
+            <span class="hero-card__task-num" aria-label={`Pasul ${i + 1}`}>{i + 1}</span>
+          )}
+          <span class:list={['hero-card__task-label', task.status === 'complete' && 'hero-card__task-label--done']}>
+            {task.label}
+          </span>
+        </li>
+      ))}
     </ul>
 
     <!-- Badge -->
@@ -68,7 +73,7 @@ import iconProgress from '../assets/icons/hero-card-task-inprogress.svg?url';
         <img src={iconTimer} width="24" height="24" alt="" aria-hidden="true" />
       </div>
       <p class="hero-card__badge-text">
-        Estimare finalizare: <strong>15 zile</strong>
+        {badgeLabel} <strong>{badgeValue}</strong>
       </p>
     </div>
 
