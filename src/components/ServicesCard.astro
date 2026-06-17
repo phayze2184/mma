@@ -66,12 +66,7 @@ const {
     border-radius: var(--radius-card) 0 0 0;
   }
 
-  .services-card--top-middle {
-    border-bottom: var(--border-default) solid var(--color-border-soft);
-  }
-
   .services-card--top-right {
-    border-left:   var(--border-default) solid var(--color-border-soft);
     border-bottom: var(--border-default) solid var(--color-border-soft);
     border-radius: 0 var(--radius-card) 0 0;
   }
@@ -81,10 +76,7 @@ const {
     border-radius: 0 0 0 var(--radius-card);
   }
 
-  /* bottom-middle: no borders, no radius */
-
   .services-card--bottom-right {
-    border-left: var(--border-default) solid var(--color-border-soft);
     border-radius: 0 0 var(--radius-card) 0;
   }
 
@@ -118,6 +110,11 @@ const {
     align-items: center;
     overflow: hidden;
     flex-shrink: 0;
+    transition: transform 250ms ease;
+  }
+
+  .services-card:hover .services-card__icon {
+    transform: rotate(-45deg);
   }
 
 

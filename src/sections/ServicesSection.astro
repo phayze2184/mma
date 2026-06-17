@@ -1,5 +1,5 @@
 ---
-import Eyebrow from '../components/Eyebrow.astro';
+import SectionHeader from '../components/SectionHeader.astro';
 import ServicesCard from '../components/ServicesCard.astro';
 
 const services = [
@@ -7,39 +7,25 @@ const services = [
     number: '01',
     title: 'Deschidere clinică/cabinet',
     description: 'Pregătim documentația pentru ONRC, DSP, ISU, Primărie, Colegiul Medicilor și alte instituții relevante.',
-    pills: ['Autorizare', 'Documente', 'Instituții'],
+    pills: ['Instituții', 'Documente', 'Autorizare'],
     placement: 'top-left' as const,
   },
   {
     number: '02',
-    title: 'Reprezentare administrativă',
-    description: 'Comunicăm cu instituțiile, gestionăm clarificările și reducem blocajele administrative pentru afaceri medicale și farmaceutice.',
-    pills: ['Suport', 'Clarificări', 'Administrativ'],
-    placement: 'top-middle' as const,
-  },
-  {
-    number: '03',
-    title: 'Strategie de creștere',
-    description: 'Planificare pentru lansarea, poziționarea și dezvoltarea unei clinici, farmacii sau afaceri din domeniul medical.',
-    pills: ['Strategie', 'Poziționare', 'Creștere'],
-    placement: 'top-right' as const,
-  },
-  {
-    number: '04',
     title: 'Promovare digitală',
     description: 'Campanii Google Ads, Meta Ads și SEO local pentru atragerea pacienților și creșterea vizibilității online.',
     pills: ['Google Ads', 'Meta', 'SEO local'],
-    placement: 'bottom-left' as const,
+    placement: 'top-right' as const,
   },
   {
-    number: '05',
+    number: '03',
     title: 'Website de prezentare',
     description: 'Creăm pagini web clare, profesionale și optimizate pentru încredere, conversie și comunicarea serviciilor medicale.',
     pills: ['UX', 'Website', 'Conversie'],
-    placement: 'bottom-middle' as const,
+    placement: 'bottom-left' as const,
   },
   {
-    number: '06',
+    number: '04',
     title: 'Listare produse RX/OTC',
     description: 'Asistență pentru produse RX, OTC, suplimente alimentare, logistică farmaceutică și documentație specifică domeniului.',
     pills: ['RX', 'OTX', 'Suplimente'],
@@ -58,22 +44,15 @@ const services = [
   <div class="services__inner">
 
     <!-- ── Section header ── -->
-    <header class="services__header">
-
-      <div class="services__header-left">
-        <Eyebrow>Serviciile noastre</Eyebrow>
-        <h2 class="services__heading">
-          <span class="services__heading-main">Ce facem,</span>
-          <br />
-          <em class="services__heading-accent">pe scurt</em><span class="services__heading-period">.</span>
-        </h2>
-      </div>
-
-      <p class="services__header-body">
-        Acoperim partea administrativă și comunicarea pentru afaceri din sănătate. De la primul dosar la primul pacient, lucrăm într-un limbaj clar: al dumneavoastră, al autorităților și al pacientului.
-      </p>
-
-    </header>
+    <SectionHeader
+      eyebrow="Serviciile noastre"
+      heading="Ce facem,"
+      headingAccent="pe scurt"
+      size="large"
+      mode="on-light"
+    >
+      Acoperim partea administrativă și comunicarea pentru afaceri din sănătate. De la primul dosar la primul pacient, lucrăm într-un limbaj clar: al dumneavoastră, al autorităților și al pacientului.
+    </SectionHeader>
 
     <!-- ── Cards grid ── -->
     <div class="services__grid">
@@ -106,70 +85,24 @@ const services = [
   }
 
 
-  /* ── Section header ── */
-
-  .services__header {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: var(--spacing-gap-very-loose); /* 48px */
-  }
-
-  .services__header-left {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-gap-tight); /* 16px */
-    flex-shrink: 0;
-  }
-
-  .services__heading {
-    font-family: var(--font-display);
-    font-size: clamp(2.25rem, 1.57rem + 2.91vw, 3.75rem); /* 36px → 60px */
-    font-weight: var(--font-weight-bold);
-    line-height: var(--line-height-display); /* 115% */
-    letter-spacing: var(--letter-spacing-tight);
-    font-style: normal;
-  }
-
-  .services__heading-main   { color: var(--color-text-primary); }
-  .services__heading-accent {
-    font-style: italic;
-    color: var(--color-text-accent-gold);
-  }
-  .services__heading-period { color: var(--color-text-primary); }
-
-  .services__header-body {
-    flex: 1 0 0;
-    max-width: 520px;
-    font-family: var(--font-sans);
-    font-size: var(--font-size-md);          /* 18px */
-    font-weight: var(--font-weight-regular);
-    line-height: var(--line-height-lg);
-    letter-spacing: var(--letter-spacing-normal);
-    color: var(--color-text-primary-muted);
-    text-align: right;
-    align-self: flex-end;
-  }
-
-
   /* ── Cards grid ── */
 
   .services__grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     width: 100%;
   }
 
 
   /* ── Animation initial states ── */
 
-  .services__header,
+  .services__inner > :first-child,
   .services__grid > * {
     opacity: 0;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .services__header,
+    .services__inner > :first-child,
     .services__grid > * {
       opacity: 1;
     }
@@ -180,17 +113,6 @@ const services = [
   @media (max-width: 768px) {
     .services {
       padding-block: var(--spacing-section-x-compact); /* 48px */
-    }
-
-    .services__header {
-      flex-direction: column;
-      align-items: stretch;
-      gap: var(--spacing-gap-loose); /* 32px */
-    }
-
-    .services__header-body {
-      text-align: left;
-      max-width: 100%;
     }
 
     .services__grid {
@@ -207,7 +129,7 @@ const services = [
     const fadeUp = (y: number): DOMKeyframesDefinition => ({ opacity: [0, 1], y: [y, 0] });
 
     inView('.services__inner', () => {
-      const header = document.querySelector('.services__header') as Element;
+      const header = document.querySelector('.services__inner > :first-child') as Element;
       const cards  = [...document.querySelectorAll('.services__grid > *')] as Element[];
 
       animate(header, fadeUp(24), { duration: 0.55, ease: 'easeOut' });
