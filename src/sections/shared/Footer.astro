@@ -1,6 +1,6 @@
 ---
-import footerPattern from '../assets/icons/footer-pattern.svg?url';
-import logomarkFooter from '../assets/icons/logomark-footer.svg?url';
+import footerPattern from '../../assets/icons/footer-pattern.svg?url';
+import logomarkFooter from '../../assets/icons/logomark-footer.svg?url';
 
 const year = new Date().getFullYear();
 
@@ -71,6 +71,7 @@ const services = [
 </footer>
 
 <style>
+@layer components {
   /* ── Shell ── */
 
   .footer {
@@ -171,8 +172,14 @@ const services = [
     text-decoration: none;
   }
 
-  .footer__service-link:hover {
+  .footer__service-link:hover,
+  .footer__service-link:focus-visible {
     color: var(--color-text-inverse);
+  }
+
+  .footer__service-link:focus-visible {
+    outline: 2px solid var(--color-text-inverse);
+    outline-offset: 3px;
   }
 
   /* ── Info row ── */
@@ -243,8 +250,14 @@ const services = [
     white-space: nowrap;
   }
 
-  .footer__legal-link:hover {
+  .footer__legal-link:hover,
+  .footer__legal-link:focus-visible {
     color: var(--color-text-inverse);
+  }
+
+  .footer__legal-link:focus-visible {
+    outline: 2px solid var(--color-text-inverse);
+    outline-offset: 3px;
   }
 
   /* ── Responsive ── */
@@ -278,4 +291,5 @@ const services = [
       display: none;
     }
   }
+}
 </style>

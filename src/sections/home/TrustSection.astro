@@ -1,9 +1,9 @@
 ---
-import Eyebrow from '../components/Eyebrow.astro';
-import iconCheckmark from '../assets/icons/trust-checkmark.svg?url';
-import iconBank      from '../assets/icons/trust-bank.svg?url';
-import iconLicense   from '../assets/icons/trust-license.svg?url';
-import iconDocument  from '../assets/icons/trust-document.svg?url';
+import Eyebrow from '../../components/Eyebrow.astro';
+import iconCheckmark from '../../assets/icons/trust-checkmark.svg?url';
+import iconBank      from '../../assets/icons/trust-bank.svg?url';
+import iconLicense   from '../../assets/icons/trust-license.svg?url';
+import iconDocument  from '../../assets/icons/trust-document.svg?url';
 
 const items = [
   { icon: iconCheckmark, label: 'GDP & GMP' },
@@ -31,6 +31,7 @@ const items = [
 </section>
 
 <style>
+@layer components {
   /* ── Section ── */
 
   .trust {
@@ -112,4 +113,6 @@ const items = [
       gap: var(--spacing-gap-tight); /* 16px */
       align-items: flex-start;
     }
+  }
+}
 </style>

@@ -1,7 +1,7 @@
 ---
-import Eyebrow  from '../components/Eyebrow.astro';
-import Button   from '../components/Button.astro';
-import HeroCard from '../components/HeroCard.astro';
+import Eyebrow  from '../../components/Eyebrow.astro';
+import Button   from '../../components/Button.astro';
+import HeroCard from '../../components/HeroCard.astro';
 
 type TaskStatus = 'complete' | 'inprogress' | 'pending';
 
@@ -24,7 +24,7 @@ interface HeroSlide {
 
 const slides: HeroSlide[] = [
   {
-    eyebrow:         'Conform GDP & GMP',
+    eyebrow:         'Deschidere clinică/cabinet',
     headingLine1:    'Autorizații medicale,',
     headingLine2Pre: 'obținute ',
     headingAccent:   'rapid',
@@ -43,7 +43,7 @@ const slides: HeroSlide[] = [
     },
   },
   {
-    eyebrow:       'Google Ads, Meta, SEO Local',
+    eyebrow:       'Marketing digital',
     headingLine1:  'Pacienți noi, aduși',
     headingAccent: 'predictibil',
     body:          'Campanii Google, Meta și SEO local construite pentru clinici și cabinete, conforme cu regulile de publicitate medicală. Dvs. vă ocupați de pacienți, noi de programări.',
@@ -61,7 +61,7 @@ const slides: HeroSlide[] = [
     },
   },
   {
-    eyebrow:       'Conformitate RX/OTC',
+    eyebrow:       'Listare produse',
     headingLine1:  'Depozitare,',
     headingAccent: 'în siguranță',
     body:          'Coordonare, depozitare și manipulare a medicamentelor conform standardelor europene. Trasabilitate completă, condiții controlate și documentație pregătită pentru inspecție.',
@@ -167,6 +167,7 @@ const slides: HeroSlide[] = [
 </section>
 
 <style>
+@layer components {
   /* ============================================================
      HERO SECTION
      ============================================================ */
@@ -338,7 +339,7 @@ const slides: HeroSlide[] = [
     position: relative;
     z-index: 1;
     display: flex;
-    gap: var(--spacing-4); /* 12px */
+    gap: var(--spacing-gap-snug);
     align-items: center;
   }
 
@@ -351,6 +352,11 @@ const slides: HeroSlide[] = [
     cursor: pointer;
     padding: 0;
     flex-shrink: 0;
+  }
+
+  .hero__dot:focus-visible {
+    outline: 2px solid var(--color-border-accent-green);
+    outline-offset: 3px;
   }
 
   /* Active: taupe-300 fill + taupe-700 border */
@@ -423,6 +429,7 @@ const slides: HeroSlide[] = [
       gap: var(--spacing-gap-default); /* 20px */
     }
   }
+}
 </style>
 
 <script>

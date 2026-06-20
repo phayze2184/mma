@@ -1,7 +1,7 @@
 ---
-import SectionHeader from '../components/SectionHeader.astro';
-import ReviewCard from '../components/ReviewCard.astro';
-import Button from '../components/Button.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
+import ReviewCard from '../../components/ReviewCard.astro';
+import Button from '../../components/Button.astro';
 
 const reviews = [
   {
@@ -64,6 +64,7 @@ const reviews = [
 </section>
 
 <style>
+@layer components {
   /* ── Section ── */
 
   .reviews {
@@ -124,6 +125,7 @@ const reviews = [
       grid-template-columns: 1fr;
     }
   }
+}
 </style>
 
 <script>

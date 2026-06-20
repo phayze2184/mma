@@ -1,0 +1,225 @@
+---
+import SectionHeader from '../../components/SectionHeader.astro';
+import Button from '../../components/Button.astro';
+import MistakeCard from '../../components/MistakeCard.astro';
+import hexGreen from '../../assets/icons/decor-sage-80.svg?url';
+import hexAmber from '../../assets/icons/decor-amber-120.svg?url';
+import doctorImg from '../../assets/images/mistakes-image.png?url';
+
+const mistakes = [
+  {
+    number: '01',
+    title: 'Dosare incomplete sau întocmite greșit',
+    body: 'Multe cabinete, clinici, farmacii pornesc procesul de autorizare fără să știe exact ce <strong>documente sunt necesare.</strong> Rezultatul: ',
+    highlight: 'dosare respinse, corecturi repetate și întârzieri la deschidere.',
+  },
+  {
+    number: '02',
+    title: 'Interpretarea eronată a cerințelor de reglementare',
+    body: 'Limbajul oficial legat de DSP, Colegiul Medicilor, GDP/GMP sau listarea produselor este adesea greu de descifrat. Fără îndrumare specializată, apar ',
+    highlight: 'interpretări greșite care blochează aprobările.',
+  },
+  {
+    number: '03',
+    title: 'Omiterea unor pași administrativi esențiali',
+    body: 'Mulți administratori nu cunosc ordinea corectă a etapelor înainte de lansare și descoperă prea târziu că ',
+    highlight: 'lipsește o aprobare sau un document obligatoriu.',
+  },
+];
+---
+
+<section class="frequent-mistakes">
+  <div class="frequent-mistakes__inner">
+
+      <div class="frequent-mistakes__content">
+
+        <div class="frequent-mistakes__left">
+          <SectionHeader
+            eyebrow="Greșeli frecvente"
+            heading="Greșeli pe care"
+            headingAccentPrefix="le poți"
+            headingAccent="evita"
+            size="small"
+            mode="on-dark"
+          >
+            Problemele care apar cel mai des în procesele medicale și administrative, și cum te ferești de ele.
+          </SectionHeader>
+
+          <ul class="frequent-mistakes__list" role="list">
+            {mistakes.map(m => (
+              <MistakeCard
+                number={m.number}
+                title={m.title}
+                body={m.body}
+                highlight={m.highlight}
+              />
+            ))}
+          </ul>
+        </div>
+
+        <div class="frequent-mistakes__right">
+          <img src={hexGreen} width="80"  height="80"  alt="" aria-hidden="true" class="frequent-mistakes__hex frequent-mistakes__hex--green" />
+          <img src={hexAmber} width="120" height="120" alt="" aria-hidden="true" class="frequent-mistakes__hex frequent-mistakes__hex--amber" />
+          <img
+            src={doctorImg}
+            alt="Consultant medical"
+            class="frequent-mistakes__image"
+            loading="lazy"
+          />
+        </div>
+
+      </div>
+
+      <div class="frequent-mistakes__actions">
+        <Button variant="secondary" href="tel:+40732032351">Sunați acum</Button>
+        <Button variant="secondary-inverse" href="mailto:contact@mma.ro">Trimiteți un e-mail</Button>
+      </div>
+
+  </div>
+</section>
+
+<style>
+@layer components {
+  /* ── Shell ── */
+
+  .frequent-mistakes {
+    width: 100vw;
+    margin-inline: calc(50% - 50vw);
+  }
+
+  .frequent-mistakes__inner {
+    position: relative;
+    overflow: clip;
+    background-color: var(--color-bg-surface-green);
+    border-radius: var(--radius-2xl) var(--radius-2xl) 0 0; /* top corners only */
+    padding: var(--spacing-section-y); /* 120px */
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-gap-loose); /* 32px */
+  }
+
+
+  /* ── Decorative hexagons ── */
+
+  .frequent-mistakes__hex {
+    position: absolute;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .frequent-mistakes__hex--green {
+    width: 80px;
+    height: 80px;
+    top: -40px;
+    right: 10px;
+    z-index: 0;
+  }
+
+  .frequent-mistakes__hex--amber {
+    width: 120px;
+    height: 120px;
+    top: -30px;
+    right: -60px;
+    z-index: 2;
+  }
+
+
+  /* ── Two-column content ── */
+
+  .frequent-mistakes__content {
+    display: flex;
+    gap: var(--spacing-7); /* 24px */
+    align-items: flex-end;
+  }
+
+  .frequent-mistakes__left {
+    flex: 0 0 640px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-gap-very-loose); /* 48px */
+  }
+
+  .frequent-mistakes__right {
+    flex: 1 0 0;
+    align-self: stretch;
+    min-width: 0;
+    position: relative;
+    isolation: isolate;
+  }
+
+  .frequent-mistakes__image {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    max-height: 768px;
+    border-radius: var(--radius-image); /* 12px */
+    object-fit: cover;
+    display: block;
+  }
+
+
+  /* ── Mistake list ── */
+
+  .frequent-mistakes__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-gap-tight); /* 16px */
+  }
+
+
+  /* ── Buttons ── */
+
+  .frequent-mistakes__actions {
+    display: flex;
+    gap: var(--spacing-gap-default); /* 20px */
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Secondary on dark bg: filled light green instead of transparent */
+  .frequent-mistakes__actions :global(.btn--secondary) {
+    background-color: var(--color-accent-green-ghost); /* green-50 */
+    color: var(--color-action-primary-default);         /* forest */
+    border: none;
+  }
+
+  .frequent-mistakes__actions :global(.btn--secondary:hover) {
+    background-color: var(--color-accent-green-soft); /* green-100 */
+  }
+
+
+  /* ── Responsive ── */
+
+  @media (max-width: 1024px) {
+    .frequent-mistakes__left {
+      flex: none;
+      width: 100%;
+    }
+
+    .frequent-mistakes__content {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .frequent-mistakes__image {
+      max-height: 420px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .frequent-mistakes__inner {
+      padding: var(--spacing-component-lg); /* 40px */
+      border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+    }
+
+    .frequent-mistakes__hex--green { display: none; }
+    .frequent-mistakes__hex--amber { display: none; }
+
+    .frequent-mistakes__actions {
+      flex-direction: column;
+    }
+  }
+}
+</style>

@@ -30,8 +30,8 @@ const { caseNumber, caseType, tasks, badgeLabel, badgeValue } = Astro.props;
         <img src={iconDocument} width="24" height="24" alt="" aria-hidden="true" />
       </div>
       <div class="hero-card__title">
-        <p class="hero-card__title-main">{caseNumber}</p>
-        <p class="hero-card__title-sub">{caseType}</p>
+        <p class="hero-card__title-main card-text-strong">{caseNumber}</p>
+        <p class="hero-card__title-sub badge-text">{caseType}</p>
       </div>
     </div>
     <hr class="hero-card__divider" />
@@ -60,7 +60,7 @@ const { caseNumber, caseType, tasks, badgeLabel, badgeValue } = Astro.props;
           {task.status === 'pending' && (
             <span class="hero-card__task-num" aria-label={`Pasul ${i + 1}`}>{i + 1}</span>
           )}
-          <span class:list={['hero-card__task-label', task.status === 'complete' && 'hero-card__task-label--done']}>
+          <span class:list={['hero-card__task-label', 'card-text', task.status === 'complete' && 'hero-card__task-label--done']}>
             {task.label}
           </span>
         </li>
@@ -72,8 +72,8 @@ const { caseNumber, caseType, tasks, badgeLabel, badgeValue } = Astro.props;
       <div class="hero-card__timer-icon">
         <img src={iconTimer} width="24" height="24" alt="" aria-hidden="true" />
       </div>
-      <p class="hero-card__badge-text">
-        {badgeLabel} <strong>{badgeValue}</strong>
+      <p class="hero-card__badge-text badge-text">
+        {badgeLabel} <strong class="badge-text-strong">{badgeValue}</strong>
       </p>
     </div>
 
@@ -81,6 +81,7 @@ const { caseNumber, caseType, tasks, badgeLabel, badgeValue } = Astro.props;
 </div>
 
 <style>
+@layer components {
   /* ============================================================
      HERO CARD
      ============================================================ */
@@ -108,7 +109,7 @@ const { caseNumber, caseType, tasks, badgeLabel, badgeValue } = Astro.props;
   .hero-card__top {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-4); /* 12px */
+    gap: var(--spacing-gap-snug);
     width: 100%;
   }
 
@@ -140,19 +141,10 @@ const { caseNumber, caseType, tasks, badgeLabel, badgeValue } = Astro.props;
   }
 
   .hero-card__title-main {
-    font-family: var(--font-sans);
-    font-size: var(--font-size-base); /* 16px */
-    font-weight: var(--font-weight-semibold);
-    line-height: var(--line-height-lg); /* 150% */
     color: var(--color-text-primary);
   }
 
   .hero-card__title-sub {
-    font-family: var(--font-sans);
-    font-size: var(--font-size-sm); /* 14px */
-    font-weight: var(--font-weight-regular);
-    line-height: 1;
-    letter-spacing: var(--letter-spacing-normal);
     color: var(--color-text-primary-muted);
   }
 
@@ -169,7 +161,7 @@ const { caseNumber, caseType, tasks, badgeLabel, badgeValue } = Astro.props;
   .hero-card__bottom {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-7); /* 24px */
+    gap: var(--spacing-component-md);
     width: 300px; /* Figma: Card Bottom is 300px (card 380 − 2×40 padding) */
   }
 
@@ -183,7 +175,7 @@ const { caseNumber, caseType, tasks, badgeLabel, badgeValue } = Astro.props;
   .hero-card__task {
     display: flex;
     align-items: center;
-    gap: var(--spacing-4); /* 12px */
+    gap: var(--spacing-gap-snug);
     height: 38px;
     flex-shrink: 0;
   }
@@ -218,10 +210,6 @@ const { caseNumber, caseType, tasks, badgeLabel, badgeValue } = Astro.props;
   }
 
   .hero-card__task-label {
-    font-family: var(--font-sans);
-    font-size: var(--font-size-base); /* 16px */
-    font-weight: var(--font-weight-regular);
-    line-height: var(--line-height-lg);
     color: var(--color-text-primary);
     white-space: nowrap;
   }
@@ -258,7 +246,7 @@ const { caseNumber, caseType, tasks, badgeLabel, badgeValue } = Astro.props;
     gap: 10px;
     background: var(--color-bg-badge); /* taupe-300 */
     border-radius: var(--radius-pill); /* 8px */
-    padding: var(--spacing-4) 20px;   /* 12px 20px */
+    padding: var(--spacing-gap-snug) var(--spacing-gap-default);
     width: 100%;
     overflow: clip;
   }
@@ -276,16 +264,8 @@ const { caseNumber, caseType, tasks, badgeLabel, badgeValue } = Astro.props;
   }
 
   .hero-card__badge-text {
-    font-family: var(--font-sans);
-    font-size: var(--font-size-sm); /* 14px */
-    font-weight: var(--font-weight-regular);
-    line-height: 1;
-    letter-spacing: var(--letter-spacing-normal);
     color: var(--color-text-primary);
     white-space: nowrap;
   }
-
-  .hero-card__badge-text strong {
-    font-weight: var(--font-weight-semibold);
-  }
+}
 </style>

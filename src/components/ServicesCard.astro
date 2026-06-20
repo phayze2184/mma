@@ -7,6 +7,7 @@ interface Props {
   description: string;
   pills: string[];
   placement?: 'top-left' | 'top-middle' | 'top-right' | 'bottom-left' | 'bottom-middle' | 'bottom-right';
+  href?: string;
 }
 
 const {
@@ -15,10 +16,13 @@ const {
   description,
   pills,
   placement = 'top-left',
+  href,
 } = Astro.props;
+
+const Tag = href ? 'a' : 'div';
 ---
 
-<div class:list={['services-card', `services-card--${placement}`]}>
+<Tag class:list={['services-card', `services-card--${placement}`]} href={href || undefined}>
 
   <div class="services-card__content">
 
@@ -38,14 +42,20 @@ const {
 
   <div class="services-card__pills" aria-label="Servicii incluse">
     {pills.map(pill => (
-      <span class="services-card__pill">{pill}</span>
+      <span class="services-card__pill pill">{pill}</span>
     ))}
   </div>
 
-</div>
+</Tag>
 
 <style>
+@layer components {
   /* ── Base ── */
+
+  a.services-card {
+    text-decoration: none;
+    color: inherit;
+  }
 
   .services-card {
     background-color: var(--color-bg-surface-light); /* taupe-100 #f3f1f1 */
@@ -57,6 +67,11 @@ const {
     min-height: 380px;
   }
 
+
+  .services-card:focus-visible {
+    outline: 2px solid var(--color-border-accent-green);
+    outline-offset: 3px;
+  }
 
   /* ── Placement — borders + corner radii ── */
 
@@ -117,13 +132,17 @@ const {
     transform: rotate(-45deg);
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    .services-card__icon { transition: none; }
+  }
+
 
   /* ── Card copy ── */
 
   .services-card__copy {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-4); /* 12px */
+    gap: var(--spacing-gap-snug);
     width: 100%;
   }
 
@@ -158,16 +177,13 @@ const {
 
   .services-card__pill {
     background-color: var(--color-bg-badge); /* taupe-300 #d8d2d0 */
-    padding-block: var(--spacing-3);          /* 8px */
-    padding-inline: var(--spacing-4);         /* 12px */
+    padding-block: var(--spacing-gap-tighter);
+    padding-inline: var(--spacing-gap-snug);
     border-radius: var(--radius-round);
     min-width: 50px;
     text-align: center;
-    font-family: var(--font-sans);
-    font-size: var(--font-size-xs);           /* 12px */
-    font-weight: var(--font-weight-regular);
-    line-height: var(--line-height-lg);
-    letter-spacing: var(--letter-spacing-wide); /* 0.5px */
+    font-size: var(--font-size-xs);           /* 12px — overrides .pill's 14px */
+    line-height: var(--line-height-lg);       /* overrides .pill's line-height-base */
     color: var(--color-text-primary);
     white-space: nowrap;
   }
@@ -199,4 +215,5 @@ const {
       border-radius: 0 0 var(--radius-card) var(--radius-card);
     }
   }
+}
 </style>

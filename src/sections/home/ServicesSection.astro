@@ -1,6 +1,6 @@
 ---
-import SectionHeader from '../components/SectionHeader.astro';
-import ServicesCard from '../components/ServicesCard.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
+import ServicesCard from '../../components/ServicesCard.astro';
 
 const services = [
   {
@@ -9,6 +9,7 @@ const services = [
     description: 'Pregătim documentația pentru ONRC, DSP, ISU, Primărie, Colegiul Medicilor și alte instituții relevante.',
     pills: ['Instituții', 'Documente', 'Autorizare'],
     placement: 'top-left' as const,
+    href: '/servicii/deschidere-cabinet',
   },
   {
     number: '02',
@@ -36,7 +37,8 @@ const services = [
   title: string;
   description: string;
   pills: string[];
-  placement: 'top-left' | 'top-middle' | 'top-right' | 'bottom-left' | 'bottom-middle' | 'bottom-right';
+  placement: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
+  href?: string;
 }>;
 ---
 
@@ -63,6 +65,7 @@ const services = [
           description={s.description}
           pills={s.pills}
           placement={s.placement}
+          href={s.href}
         />
       ))}
     </div>
@@ -71,6 +74,7 @@ const services = [
 </section>
 
 <style>
+@layer components {
   /* ── Section wrapper ── */
 
   .services {
@@ -119,6 +123,7 @@ const services = [
       grid-template-columns: 1fr;
     }
   }
+}
 </style>
 
 <script>

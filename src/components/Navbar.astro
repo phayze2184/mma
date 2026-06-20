@@ -70,6 +70,7 @@ import Button from './Button.astro';
 </script>
 
 <style>
+@layer components {
   /* ============================================================
      NAVBAR BASE
      ============================================================ */
@@ -110,13 +111,15 @@ import Button from './Button.astro';
   }
 
   .nav-link {
-    font-family: var(--font-sans);
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-regular);
     color: var(--color-text-primary);
     text-decoration: none;
     position: relative;
     padding-block-end: 2px;
+  }
+
+  .nav-link:focus-visible {
+    outline: 2px solid var(--color-border-accent-green);
+    outline-offset: 4px;
   }
 
   .nav-link::after {
@@ -159,6 +162,12 @@ import Button from './Button.astro';
     flex-shrink: 0;
   }
 
+  .navbar__hamburger:focus-visible {
+    outline: 2px solid var(--color-border-accent-green);
+    outline-offset: 3px;
+    border-radius: var(--radius-md);
+  }
+
   .navbar__hamburger span {
     display: block;
     width: 100%;
@@ -173,6 +182,11 @@ import Button from './Button.astro';
   .navbar__hamburger--open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .navbar__hamburger--open span:nth-child(2) { opacity: 0; }
   .navbar__hamburger--open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nav-link::after { transition: none; }
+    .navbar__hamburger span { transition: none; }
+  }
 
   /* ============================================================
      RESPONSIVE — HAMBURGER (<1024px)
@@ -226,4 +240,5 @@ import Button from './Button.astro';
       display: none;
     } 
   }
+}
 </style>

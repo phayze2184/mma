@@ -1,6 +1,6 @@
 ---
-import SectionHeader from '../components/SectionHeader.astro';
-import ProcessCard from '../components/ProcessCard.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
+import ProcessCard from '../../components/ProcessCard.astro';
 
 const steps = [
   {
@@ -59,6 +59,7 @@ const steps = [
 </section>
 
 <style>
+@layer components {
   .process {
     padding-block: var(--spacing-section-x); /* 120px */
     width: 100vw;
@@ -107,6 +108,7 @@ const steps = [
       display: none;
     }
   }
+}
 </style>
 
 <script>

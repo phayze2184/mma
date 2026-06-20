@@ -29,51 +29,53 @@
 }
 
 
-:root {
+@layer tokens {
+  :root {
 
-  /* --- Font Family --- */
+    /* --- Font Family --- */
 
-  --font-sans:    'Jost', sans-serif;
-  --font-display: 'Playfair Display', serif;
-
-
-  /* --- Font Size --- */
-
-  --font-size-xs:      12px;
-  --font-size-sm:      14px;
-  --font-size-base:    16px;
-  --font-size-md:      18px;
-  --font-size-lg:      20px;
-  --font-size-xl:      24px;
-  --font-size-2xl:     30px;
-  --font-size-3xl:     36px;
-  --font-size-4xl:     48px;
-  --font-size-5xl:     60px;
-  --font-size-display: 72px;
+    --font-sans:    'Jost', sans-serif;
+    --font-display: 'Playfair Display', serif;
 
 
-  /* --- Line Height --- */
+    /* --- Font Size --- */
 
-  --line-height-display: 115%;
-  --line-height-base:    100%;  
-  --line-height-lg:      150%;
+    --font-size-xs:      12px;
+    --font-size-sm:      14px;
+    --font-size-base:    16px;
+    --font-size-md:      18px;
+    --font-size-lg:      20px;
+    --font-size-xl:      24px;
+    --font-size-2xl:     30px;
+    --font-size-3xl:     36px;
+    --font-size-4xl:     48px;
+    --font-size-5xl:     60px;
+    --font-size-display: 72px;
 
 
-  /* --- Font Weight --- */
+    /* --- Line Height --- */
 
-  --font-weight-regular:  400;
-  --font-weight-medium:   500;
-  --font-weight-semibold: 600;
-  --font-weight-bold:     700;
+    --line-height-display: 115%;
+    --line-height-base:    100%;
+    --line-height-lg:      150%;
 
 
-  /* --- Letter Spacing --- */
+    /* --- Font Weight --- */
 
-  --letter-spacing-tight:  -1px;
-  --letter-spacing-normal:  0px;
-  --letter-spacing-wide:    0.5px;
-  --letter-spacing-wider:   1.5px;
+    --font-weight-regular:  400;
+    --font-weight-medium:   500;
+    --font-weight-semibold: 600;
+    --font-weight-bold:     700;
 
+
+    /* --- Letter Spacing --- */
+
+    --letter-spacing-tight:  -1px;
+    --letter-spacing-normal:  0px;
+    --letter-spacing-wide:    0.5px;
+    --letter-spacing-wider:   1.5px;
+
+  }
 }
 
 
@@ -81,68 +83,71 @@
    BASE ELEMENT TYPOGRAPHY
    ============================================================ */
 
-h1, h2, h3, h4, h6 {
-  font-family: var(--font-display);
-}
+@layer base {
+  h1, h2, h3, h4, h6 {
+    font-family: var(--font-display);
+  }
 
-p, h5 {
-  font-family: var(--font-sans);
-}
-
-
-/* --- Heading 1 --- */
-
-h1 {
-  font-size: clamp(1.75rem, 1.18rem + 2.42vw, 3rem); /* 28px → 48px */
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-display);
-  letter-spacing: var(--letter-spacing-tight);
-}
+  p, h5 {
+    font-family: var(--font-sans);
+  }
 
 
-/* --- Heading 2 --- */
+  /* --- Heading 1 --- */
 
-h2 {
-  font-size: clamp(2.25rem, 1.57rem + 2.91vw, 3.75rem); /* 36px → 60px */
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-display);
-  letter-spacing: var(--letter-spacing-tight);
-}
-
-
-/* --- Heading 3 --- */
-
-h3 {
-  font-size: clamp(1.5rem, 1.16rem + 1.46vw, 2.25rem); /* 24px → 36px */
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-display);
-  letter-spacing: var(--letter-spacing-normal);
-}
+  h1 {
+    font-size: clamp(1.75rem, 1.18rem + 2.42vw, 3rem); /* 28px → 48px */
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-display);
+    letter-spacing: var(--letter-spacing-tight);
+  }
 
 
-/* --- Heading 4 --- */
+  /* --- Heading 2 --- */
 
-h4 {
-  font-size: clamp(1.375rem, 1.15rem + 0.97vw, 1.875rem); /* 22px → 30px */
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-lg);
-  letter-spacing: var(--letter-spacing-normal);
-}
+  h2 {
+    font-size: clamp(2.25rem, 1.57rem + 2.91vw, 3.75rem); /* 36px → 60px */
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-display);
+    letter-spacing: var(--letter-spacing-tight);
+  }
 
-/* --- Heading 5 --- */
 
-h5 {
-  font-size: clamp(1.125rem, 0.9rem + 0.75vw, 1.5rem); /* 18px → 24px */
-  font-weight: var(--font-weight-medium);
-  line-height: var(--line-height-base);
-  letter-spacing: var(--letter-spacing-normal);
-}
+  /* --- Heading 3 --- */
 
-p {
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-lg);
-  letter-spacing: var(--letter-spacing-normal);
+  h3 {
+    font-size: clamp(1.5rem, 1.16rem + 1.46vw, 2.25rem); /* 24px → 36px */
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-display);
+    letter-spacing: var(--letter-spacing-normal);
+  }
+
+
+  /* --- Heading 4 --- */
+
+  h4 {
+    font-size: clamp(1.375rem, 1.15rem + 0.97vw, 1.875rem); /* 22px → 30px */
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-lg);
+    letter-spacing: var(--letter-spacing-normal);
+  }
+
+  /* --- Heading 5 --- */
+
+  h5 {
+    font-size: clamp(1.125rem, 0.9rem + 0.75vw, 1.5rem); /* 18px → 24px */
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-base);
+    letter-spacing: var(--letter-spacing-normal);
+    text-transform: uppercase;
+  }
+
+  p {
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-lg);
+    letter-spacing: var(--letter-spacing-normal);
+  }
 }
 
 
@@ -150,78 +155,89 @@ p {
    TYPOGRAPHY TOKENS
    ============================================================ */
 
-/* --- Eyebrow --- */
+@layer utilities {
+  /* --- Body small --- */
 
-.eyebrow {
-  font-family: var(--font-sans);
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-lg);
-  letter-spacing: var(--letter-spacing-wider);
-  text-transform: uppercase;
+  .body-sm {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-lg);
+    letter-spacing: var(--letter-spacing-normal);
+  }
+
+  /* --- Eyebrow --- */
+
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-lg);
+    letter-spacing: var(--letter-spacing-wider);
+    text-transform: uppercase;
+  }
+
+  /* --- Pill / Badge --- */
+
+  .pill {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-base);
+    letter-spacing: var(--letter-spacing-wide);
+  }
+
+  .nav-link {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-lg);
+    letter-spacing: var(--letter-spacing-wider);
+  }
+
+  /* --- Card Text --- */
+
+  .card-text {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-lg);
+    letter-spacing: var(--letter-spacing-normal);
+  }
+
+  .card-text-strong {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-lg);
+    letter-spacing: var(--letter-spacing-normal);
+  }
+
+  /* --- Button --- */
+
+  .btn-label {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-lg);
+    letter-spacing: var(--letter-spacing-wider);
+  }
+
+  /* --- Badge Text --- */
+
+  .badge-text {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-base);
+    letter-spacing: var(--letter-spacing-normal);
+  }
+
+  .badge-text-strong {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-base);
+    letter-spacing: var(--letter-spacing-normal);
+  }
 }
-
-/* --- Pill / Badge --- */
-
-.pill {
-  font-family: var(--font-sans);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-base);
-  letter-spacing: var(--letter-spacing-wide);
-} 
-
-.nav-link {
-  font-family: var(--font-sans);
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-lg);
-  letter-spacing: var(--letter-spacing-wider);
-}
-
-/* --- Card Text --- */
-
-.card-text {
-  font-family: var(--font-sans);
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-lg);
-  letter-spacing: var(--letter-spacing-normal);
-} 
-
-.card-text-strong {
-  font-family: var(--font-sans);
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-lg);
-  letter-spacing: var(--letter-spacing-normal);
-} 
-
-/* --- Button --- */
-
-.btn-label {
-  font-family: var(--font-sans);
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-lg);
-  letter-spacing: var(--letter-spacing-wider);
-} 
-
-/* --- Badge Text --- */
-
-.badge-text {
-  font-family: var(--font-sans);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-base);
-  letter-spacing: var(--letter-spacing-normal);
-} 
-
-.badge-text-strong {
-  font-family: var(--font-sans);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-base);
-  letter-spacing: var(--letter-spacing-normal);
-}
-

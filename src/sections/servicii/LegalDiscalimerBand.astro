@@ -1,0 +1,35 @@
+---
+---
+
+<div class="legal-band">
+    <div class="legal-band__box">
+      <p class="legal-band__text body-sm" >
+        <strong class="legal-band__label">Notă importantă:</strong>
+        Legislația este în continuă schimbare. Dosarele pot suferi modificări în funcție de județ și specialitate.
+        <br />
+        Noi verificăm lista actualizată pentru cazul dvs. înainte de a începe procesul.
+      </p>
+    </div>
+</div>
+
+<style>
+@layer components {
+  .legal-band {
+    overflow: clip;
+  }
+
+  .legal-band__box {
+    width: 100%;
+    background-color: var(--color-bg-surface-light);
+    border: var(--border-hairline) solid var(--color-border-strong);
+    border-radius: var(--radius-2xl); /* 24px */
+    padding-block: var(--spacing-component-lg); /* 40px */
+    text-align: center;
+    margin-block: var(--spacing-section-y-compact); /* 64px above and below */
+  }
+
+  .legal-band__label {
+    font-weight: var(--font-weight-medium);
+  }
+}
+</style>

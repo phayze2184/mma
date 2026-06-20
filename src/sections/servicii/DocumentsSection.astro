@@ -1,0 +1,122 @@
+---
+import SectionHeader from '../../components/SectionHeader.astro';
+import DocumentsCard from '../../components/DocumentsCard.astro';
+
+import iconPersonale from '../../assets/icons/doc-icon-personale.svg?url';
+import iconSpatiu    from '../../assets/icons/doc-icon-spatiu.svg?url';
+import iconDsp       from '../../assets/icons/doc-icon-dsp.svg?url';
+import iconSuplim    from '../../assets/icons/doc-icon-suplimentare.svg?url';
+
+const cards = [
+  {
+    icon: iconPersonale,
+    title: 'Acte personale',
+    subtitle: 'Documentele personale ale medicului titular',
+    documents: [
+      'Carte de identitate (copie)',
+      'Diplomă de medic și diplomă de specialitate',
+      'Certificatul de membru al Colegiului Medicilor',
+      'Asigurare de malpraxis',
+    ],
+  },
+  {
+    icon: iconSpatiu,
+    title: 'Acte spațiu',
+    subtitle: 'Documentația pentru locația cabinetului',
+    documents: [
+      'Contract de închiriere sau act de proprietate',
+      'Schiță cadastrală a spațiului (copie)',
+      'Acordul asociației de locatari (dacă e cazul)',
+      'Acordul vecinilor/terților (după caz)',
+    ],
+  },
+  {
+    icon: iconDsp,
+    title: 'Acte DSP',
+    subtitle: 'Dosarul pentru Direcția de Sănătate Publică',
+    documents: [
+      'Cerere tip DSP (completată și semnată)',
+      'Dovada spațiului (copie)',
+      'Certificatul de avizare de la Colegiul Medicilor (original)',
+      'Declarație pe propria răspundere privind respectarea normelor',
+    ],
+  },
+  {
+    icon: iconSuplim,
+    title: 'Acte Suplimentare',
+    subtitle: 'Alte documente necesare funcționării',
+    documents: [
+      'Contract de salubrizare (deșeuri medicale)',
+      'Contract colectare deșeuri menajere',
+      'Act constitutiv/statut (pentru SRL)',
+      'Cod CAEN 8622 sau 8621 (asistență medicală)',
+    ],
+  },
+];
+---
+
+<section class="documents-section">
+  <div class="documents-section__inner">
+
+      <SectionHeader
+        eyebrow="Acte necesare"
+        heading="Ce acte trebuie"
+        headingAccentPrefix="să"
+        headingAccent="pregătiți"
+        size="large"
+        mode="on-dark"
+      >
+        Am sintetizat lista completă de documente necesare pentru deschiderea unui cabinet medical.
+        Fiecare categorie e verificată de noi.
+      </SectionHeader>
+
+      <div class="documents-section__grid">
+        {cards.map(card => (
+          <DocumentsCard
+            icon={card.icon}
+            title={card.title}
+            subtitle={card.subtitle}
+            documents={card.documents}
+          />
+        ))}
+      </div>
+
+  </div>
+</section>
+
+<style>
+@layer components {
+  .documents-section {
+    width: 100vw;
+    margin-inline: calc(50% - 50vw);
+  }
+
+  .documents-section__inner {
+    background-color: var(--color-bg-surface-green);
+    border-radius: var(--radius-2xl); /* 24px */
+    padding: var(--spacing-section-y);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-section-y-compact); /* 64px */
+  }
+
+  .documents-section__grid {
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-7); /* 24px */
+  }
+
+  @media (max-width: 768px) {
+    .documents-section__inner {
+      padding: var(--spacing-component-lg); /* 40px */
+      border-radius: var(--radius-card);    /* 16px */
+    }
+
+    .documents-section__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+</style>

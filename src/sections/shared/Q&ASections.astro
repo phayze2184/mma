@@ -1,10 +1,10 @@
 ---
-import SectionHeader from '../components/SectionHeader.astro';
-import qaImage from '../assets/images/qa-image.png';
-import Accordion from '../components/Accordion.astro';
-import Button from '../components/Button.astro'
-import decorSage from '../assets/icons/decor-sage-80.svg?url';
-import decorAmber from '../assets/icons/decor-amber-120.svg?url';
+import SectionHeader from '../../components/SectionHeader.astro';
+import qaImage from '../../assets/images/qa-image.png';
+import Accordion from '../../components/Accordion.astro';
+import Button from '../../components/Button.astro'
+import decorSage from '../../assets/icons/decor-sage-80.svg?url';
+import decorAmber from '../../assets/icons/decor-amber-120.svg?url';
 
 const items = [
   {
@@ -91,6 +91,7 @@ const items = [
 </section>
 
 <style>
+@layer components {
   /* ── Section ── */
 
   .qa {
@@ -303,6 +304,7 @@ const items = [
       display: none;
     }
   }
+}
 </style>
 
 <script>

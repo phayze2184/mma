@@ -1,0 +1,120 @@
+---
+import checkIcon from '../assets/icons/document-check.svg?url';
+
+interface Props {
+  icon: string;
+  title: string;
+  subtitle: string;
+  documents: string[];
+}
+
+const { icon, title, subtitle, documents } = Astro.props;
+---
+
+<div class="document-card">
+
+  <!-- ── Header: icon tile + copy ── -->
+  <div class="document-card__header">
+    <div class="document-card__icon-tile" aria-hidden="true">
+      <img src={icon} width="32" height="32" alt="" />
+    </div>
+    <div class="document-card__copy">
+      <h5 class="document-card__title">{title}</h5>
+      <p class="document-card__subtitle body-sm">{subtitle}</p>
+    </div>
+  </div>
+
+  <!-- ── Document list ── -->
+  <ul class="document-card__list" role="list">
+    {documents.map(doc => (
+      <li class="document-card__item">
+        <img src={checkIcon} width="24" height="24" alt="" aria-hidden="true" class="document-card__check" />
+        <span class="document-card__doc-text">{doc}</span>
+      </li>
+    ))}
+  </ul>
+
+</div>
+
+<style>
+@layer components {
+  /* ── Card shell ── */
+
+  .document-card {
+    background-color: var(--color-bg-surface-light);
+    border: var(--border-hairline) solid var(--color-border-default);
+    border-radius: var(--radius-card);
+    padding: var(--spacing-component-lg); /* 40px */
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-gap-default); /* 20px */
+    box-shadow: var(--elevation-2);
+ }
+
+
+  /* ── Header ── */
+
+  .document-card__header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-gap-default); /* 20px */
+  }
+
+  .document-card__icon-tile {
+    width: var(--size-icon-xl);
+    height: var(--size-icon-xl);
+    flex-shrink: 0;
+    background-color: var(--color-bg-surface-green); /* forest #2d4a3e */
+    border-radius: var(--radius-md); /* 8px */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: clip;
+  }
+
+  .document-card__copy {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .document-card__title {
+    line-height: 1;
+    color: var(--color-text-primary);
+  }
+
+  .document-card__subtitle {
+    color: var(--color-text-primary-muted);
+  }
+
+  /* ── Document list ── */
+
+  .document-card__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-gap-tighter); /* 8px */
+  }
+
+  .document-card__item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-gap-tighter); /* 8px */
+  }
+
+  .document-card__check {
+    flex-shrink: 0;
+  }
+
+  .document-card__doc-text {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-md); /* 18px */
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-lg); /* 1.5 */
+    letter-spacing: var(--letter-spacing-normal);
+    color: var(--color-text-primary);
+    flex: 1;
+    min-width: 0;
+  }
+}
+</style>

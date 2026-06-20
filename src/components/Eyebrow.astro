@@ -27,6 +27,7 @@ const isOnLight = mode === 'on-light';
 </div>
 
 <style>
+@layer components {
   .eyebrow {
     display: inline-flex;
     align-items: center;
@@ -61,4 +62,5 @@ const isOnLight = mode === 'on-light';
   /* --- On Dark --- */
 
   .eyebrow--on-dark .eyebrow__text  { color: var(--color-text-inverse); }
+}
 </style>

@@ -4,6 +4,8 @@ import Eyebrow from './Eyebrow.astro';
 interface Props {
   eyebrow: string;
   heading: string;
+  headingLine2?: string;
+  headingAccentPrefix?: string;
   headingAccent: string;
   size?: 'large' | 'small';
   mode?: 'on-light' | 'on-dark';
@@ -14,6 +16,8 @@ interface Props {
 const {
   eyebrow,
   heading,
+  headingLine2,
+  headingAccentPrefix,
   headingAccent,
   size = 'large',
   mode = 'on-light',
@@ -29,8 +33,14 @@ const {
 
     <h2 class="section-header__heading">
       <span class="section-header__heading-main">{heading}</span>
+      {headingLine2 && (
+        <>
+          <br />
+          <span class="section-header__heading-main">{headingLine2}</span>
+        </>
+      )}
       <br />
-      <em class="section-header__heading-accent">{headingAccent}</em><span class="section-header__heading-period">.</span>
+      {headingAccentPrefix && <span class="section-header__heading-main">{headingAccentPrefix} </span>}<em class="section-header__heading-accent">{headingAccent}</em><span class="section-header__heading-period">.</span>
     </h2>
   </div>
 
@@ -41,11 +51,14 @@ const {
 </div>
 
 <style>
+@layer components {
   /* ============================================================
      SECTION HEADER BASE
      ============================================================ */
 
   .section-header {
+    margin: auto;
+    max-width: 1200px;
     display: flex;
     width: 100%;
   }
@@ -173,4 +186,5 @@ const {
     line-height: var(--line-height-lg);  /* 150% */
     letter-spacing: var(--letter-spacing-normal);
   }
+}
 </style>

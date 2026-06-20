@@ -1,0 +1,93 @@
+---
+interface Props {
+  number: string;
+  title: string;
+  body: string;
+  highlight: string;
+}
+
+const { number, title, body, highlight } = Astro.props;
+---
+
+<li class="mistake-card">
+  <span class="mistake-card__number">{number}</span>
+  <div class="mistake-card__body">
+    <h4 class="mistake-card__title">{title}</h4>
+    <div class="mistake-card__copy">
+      <div class="mistake-card__line" aria-hidden="true"></div>
+      <p class="mistake-card__text">
+        <Fragment set:html={body} />
+        <em class="mistake-card__highlight">{highlight}</em>
+      </p>
+    </div>
+  </div>
+</li>
+
+<style>
+@layer components {
+  .mistake-card {
+    display: flex;
+    gap: var(--spacing-gap-default); /* 20px */
+    align-items: flex-start;
+    padding-bottom: var(--spacing-gap-default); /* 20px */
+    border-bottom: var(--border-hairline) solid var(--color-border-accent-green);
+  }
+
+  .mistake-card__number {
+    font-family: var(--font-display);
+    font-size: var(--font-size-4xl); /* 48px */
+    font-weight: var(--font-weight-semibold);
+    line-height: 1;
+    color: var(--color-text-accent-gold-inverse);
+    flex-shrink: 0;
+  }
+
+  .mistake-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-gap-default); /* 20px */
+    flex: 1;
+    min-width: 0;
+  }
+
+  .mistake-card__title {
+    color: var(--color-text-inverse);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .mistake-card__copy {
+    display: flex;
+    gap: var(--spacing-gap-default); /* 20px */
+    align-items: center;
+  }
+
+  .mistake-card__line {
+    flex-shrink: 0;
+    width: 1.5px;
+    align-self: stretch;
+    min-height: 80px;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      var(--color-text-accent-gold-inverse) 30%,
+      var(--color-text-accent-gold-inverse) 70%,
+      transparent
+    );
+  }
+
+  .mistake-card__text {
+    color: var(--color-text-inverse-muted);
+    font-size: var(--font-size-md);
+  }
+
+  .mistake-card__text strong {
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-inverse-muted);
+  }
+
+  .mistake-card__highlight {
+    color: var(--color-text-accent-gold-inverse);
+    font-style: normal;
+  }
+}
+</style>

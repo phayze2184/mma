@@ -1,0 +1,328 @@
+---
+import SectionHeader from '../../components/SectionHeader.astro';
+import StepCard from '../../components/StepCard.astro';
+
+const steps = [
+  {
+    number: '01',
+    eyebrow: 'CMI, SRI, SCM',
+    title: 'Alegeți forma juridică',
+    body: 'Primul pas este alegerea formei juridice potrivite. Cabinetul Medical Individual (CMI) este cea mai simplă formă, ideală pentru un singur medic. SRL-ul medical oferă răspundere limitată, iar Societatea Civilă Medicală permite gruparea mai multor asociați care partajează infrastructura.',
+    bullets: [
+      'CMI: răspundere nelimitată, contabilitate simplificată, costuri inițiale mici',
+      'SRL: răspundere limitată, permite investitori și angajați, impozit pe profit',
+      'SCM: ideală pentru medici de specialități complementare care partajează spațiul și echipamentele',
+    ],
+  },
+  {
+    number: '02',
+    eyebrow: 'DSP, ANAF, ONRC',
+    title: 'Înregistrarea structurii',
+    body: 'În funcție de forma aleasă, înregistrarea se face la DSP (pentru CMI) sau la ONRC (pentru SRL). Vă pregătim documentele și vă ghidăm pentru a evita erorile frecvente care blochează dosarul.',
+    bullets: [
+      'CMI: act de înfiinţare notarial, înregistrare DSP, obţinere cod fiscal ANAF',
+      'SRL: înregistrare ONRC, notificare DSP, autorizaţie sanitară de funcţionare',
+      'Verificăm în prealabil disponibilitatea denumirii şi conformitatea documentelor',
+    ],
+  },
+  {
+    number: '03',
+    eyebrow: 'Norme tehnice DSP',
+    title: 'Amenajarea spațiului',
+    body: 'Spațiul trebuie să respecte norme precise impuse de DSP: suprafaţă minimă, ventilație, apă curentă, grup sanitar accesibil. Verificăm eligibilitatea locaţiei înainte de a semna contractul de închiriere.',
+    bullets: [
+      'Suprafaţă min. 12 mp consultaţii + 10 mp sală de aşteptare cu ventilaţie naturală sau mecanică',
+      'Pardoseală şi pereţi lavabili pe min. 1,8 m | grup sanitar accesibil pacienţilor',
+      'Iluminat min. 500 lux la suprafaţa de examinare | accesibilitate persoane cu dizabilităţi',
+    ],
+  },
+  {
+    number: '04',
+    eyebrow: 'Echipamente obligatorii',
+    title: 'Asigurarea dotării minime',
+    body: 'Fiecare specialitate are o listă de dotare minimă obligatorie stabilită prin ordin de ministru. Vă ajutăm să identificaţi exact ce aveţi nevoie, fără investiţii inutile.',
+    bullets: [
+      'Pat de examinare, birou, dulap instrumentar cu dispozitiv de sterilizare',
+      'Trusă de urgenţă conform Ordin MS şi trusă de şoc anafilactic (dacă se fac injecţii)',
+      'Containere deşeuri medicale conform regulamentului de gestionare',
+    ],
+  },
+  {
+    number: '05',
+    eyebrow: 'Autorizație sanitară',
+    title: 'Depunerea dosarului la DSP',
+    body: 'Pregătim dosarul complet şi vă asistăm la depunerea către DSP. Ştim exact ce documente se cer, cum se completează corect şi cum se evită motivele de respingere.',
+    bullets: [
+      'Cerere tip, act spaţiu, certificat Colegiu Medici, asigurare malpraxis valabilă',
+      'Facem programare prealabilă la DSP şi verificăm dosarul înainte de depunere',
+      'Urmărim statusul şi răspundem solicitărilor de completare în termenul legal',
+    ],
+  },
+  {
+    number: '06',
+    eyebrow: 'Verificare finală',
+    title: 'Inspecție și autorizare',
+    body: 'După depunere, DSP programează inspecţia la faţa locului. Vă pregătim pentru această etapă astfel încât să nu existe surprize la control.',
+    bullets: [
+      'Inspecţia verifică conformitatea spaţiului, dotărilor şi documentelor afişate obligatoriu',
+      'Primiţi autorizaţia sanitară de funcţionare — cabinetul este oficial operaţional',
+      'Vă îndrumăm pentru afilierea la Casa de Sănătate şi primele contracte cu pacienţii',
+    ],
+  },
+];
+---
+
+<section class="steps-section">
+  <div class="steps-section__inner container">
+
+    <!-- ── Section header ── -->
+    <SectionHeader
+      eyebrow="Procesul de deschidere"
+      heading="Pașii concreți"
+      headingLine2="pentru a vă deschide"
+      headingAccent="cabinetul"
+      size="large"
+    >
+      Un proces structurat, validat prin experienţă.
+      Fiecare pas este gândit să elimine blocajele birocratice şi să accelereze deschiderea.
+    </SectionHeader>
+
+    <!-- ── Carousel + side arrows ── -->
+    <div class="steps-section__carousel-wrapper">
+
+      <button class="steps-section__prev" type="button" aria-label="Pasul anterior" disabled>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false">
+          <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <div class="steps-section__carousel">
+        <div class="steps-section__track" id="steps-track">
+          {steps.map((step, i) => (
+            <div class="steps-section__slide">
+              <StepCard
+                number={step.number}
+                eyebrow={step.eyebrow}
+                title={step.title}
+                body={step.body}
+                bullets={step.bullets}
+                isLast={i === steps.length - 1}
+                variant={i % 2 !== 0 ? 'amber' : 'green'}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <button class="steps-section__next" type="button" aria-label="Pasul următor">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false">
+          <path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+    </div>
+
+    <!-- ── Navigation dots ── -->
+    <div class="steps-section__nav" role="tablist" aria-label="Navigare pași">
+      {steps.map((_, i) => (
+        <button
+          class:list={['steps-section__dot', i === 0 && 'steps-section__dot--active']}
+          role="tab"
+          aria-selected={i === 0 ? 'true' : 'false'}
+          aria-label={`Pasul ${i + 1}`}
+          data-index={String(i)}
+          type="button"
+        />
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<script>
+  const track   = document.getElementById('steps-track') as HTMLElement;
+  const dots    = document.querySelectorAll<HTMLButtonElement>('.steps-section__dot');
+  const prevBtn = document.querySelector<HTMLButtonElement>('.steps-section__prev')!;
+  const nextBtn = document.querySelector<HTMLButtonElement>('.steps-section__next')!;
+
+  let activeIndex = 0;
+
+  function scrollToSlide(index: number): void {
+    const slide = track.children[index] as HTMLElement;
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    track.scrollTo({ left: slide.offsetLeft, behavior: prefersReduced ? 'instant' : 'smooth' });
+  }
+
+  function setActive(index: number): void {
+    activeIndex = index;
+    dots.forEach((dot, i) => {
+      const active = i === index;
+      dot.classList.toggle('steps-section__dot--active', active);
+      dot.setAttribute('aria-selected', String(active));
+    });
+    prevBtn.disabled = index === 0;
+    nextBtn.disabled = index === dots.length - 1;
+  }
+
+  dots.forEach((dot) => {
+    dot.addEventListener('click', () => scrollToSlide(Number(dot.dataset.index)));
+  });
+
+  prevBtn.addEventListener('click', () => { if (activeIndex > 0) scrollToSlide(activeIndex - 1); });
+  nextBtn.addEventListener('click', () => { if (activeIndex < dots.length - 1) scrollToSlide(activeIndex + 1); });
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          const index = Array.from(track.children).indexOf(entry.target);
+          if (index !== -1) setActive(index);
+        }
+      }
+    },
+    { root: track, threshold: 0.5 },
+  );
+
+  Array.from(track.children).forEach((slide) => observer.observe(slide));
+</script>
+
+<style>
+@layer components {
+  /* ── Section shell ── */
+
+  .steps-section {
+    padding-block: var(--spacing-section-y);
+  }
+
+  .steps-section__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-gap-very-loose); /* 48px */
+  }
+
+  /* Wider heading block so "pentru a vă deschide" fits on one line at 60px */
+  .steps-section .steps-section__inner :global(.section-header--large .section-header__left) {
+    max-width: 700px;
+  }
+
+
+  /* ── Carousel ── */
+
+  .steps-section__carousel {
+    overflow: hidden;
+  }
+
+  .steps-section__track {
+    display: flex;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .steps-section__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .steps-section__slide {
+    flex: 0 0 100%;
+    min-width: 0;
+    scroll-snap-align: start;
+    display: flex;
+    align-items: stretch;
+  }
+
+
+  /* ── Carousel wrapper (positions side arrows) ── */
+
+  .steps-section__carousel-wrapper {
+    position: relative;
+  }
+
+  .steps-section__prev,
+  .steps-section__next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-round);
+    border: var(--border-default) solid var(--color-border-default);
+    background-color: var(--color-bg-elevated-surface);
+    color: var(--color-text-primary);
+    cursor: pointer;
+    padding: 0;
+    flex-shrink: 0;
+    transition: border-color 200ms ease, background-color 200ms ease;
+
+    &:hover:not(:disabled) {
+      border-color: var(--color-border-strong);
+      background-color: var(--color-bg-surface-light);
+    }
+
+    &:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-border-accent-green);
+      outline-offset: 3px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  .steps-section__prev { left:  var(--spacing-component-sm); /* 16px */ }
+  .steps-section__next { right: var(--spacing-component-sm); }
+
+
+  /* ── Navigation dots ── */
+
+  .steps-section__nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-gap-tight); /* 16px */
+  }
+
+  .steps-section__dot {
+    width: 12px;
+    height: 12px;
+    border-radius: var(--radius-round);
+    border: 2px solid var(--color-border-default);
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+    flex-shrink: 0;
+    position: relative;
+    transition: border-color 200ms ease, background-color 200ms ease;
+
+    /* Expand click target without affecting layout */
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -8px;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-border-accent-green);
+      outline-offset: 3px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  .steps-section__dot--active {
+    background-color: var(--color-border-strong);
+    border-color: var(--color-border-strong);
+  }
+}
+</style>

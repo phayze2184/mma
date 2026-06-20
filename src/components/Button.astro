@@ -16,22 +16,23 @@ const {
 } = Astro.props;
 
 const tag = href ? 'a' : 'button';
-const showArrow = variant === 'tertiary';
+const showArrow = false;
 ---
 
 {tag === 'a' ? (
-  <a href={href} class:list={['btn', `btn--${variant}`, className]}>
+  <a href={href} class:list={['btn', 'btn-label', `btn--${variant}`, className]}>
     <slot />
     {showArrow && <img src={arrowRight} width="24" height="24" alt="" aria-hidden="true" class="btn__arrow" />}
   </a>
 ) : (
-  <button type={type} class:list={['btn', `btn--${variant}`, className]}>
+  <button type={type} class:list={['btn', 'btn-label', `btn--${variant}`, className]}>
     <slot />
     {showArrow && <img src={arrowRight} width="24" height="24" alt="" aria-hidden="true" class="btn__arrow" />}
   </button>
 )}
 
 <style>
+@layer components {
   .btn {
     display: inline-flex;
     align-items: center;
@@ -39,15 +40,16 @@ const showArrow = variant === 'tertiary';
     padding-block: var(--spacing-component-sm);   /* 16px */
     padding-inline: var(--spacing-component-md);  /* 20px */
     border-radius: var(--radius-button);
-    font-family: var(--font-sans);
-    font-size: var(--font-size-base);
     font-weight: var(--font-weight-medium);
-    line-height: var(--line-height-lg);
-    letter-spacing: var(--letter-spacing-wider);
     white-space: nowrap;
     cursor: pointer;
     transition: background-color 150ms ease, border-color 150ms ease;
     border: none;
+  }
+
+  .btn:focus-visible {
+    outline: 2px solid var(--color-border-accent-green);
+    outline-offset: 3px;
   }
 
   /* --- Primary --- */
@@ -85,17 +87,19 @@ const showArrow = variant === 'tertiary';
   .btn--secondary-inverse:active { background-color: rgba(220, 252, 231, 0.15); }
 
 
-  /* --- Tertiary (text + arrow icon, for use on dark backgrounds) --- */
+  /* --- Tertiary (ghost / outlined) --- */
 
   .btn--tertiary {
     background-color: transparent;
-    color: var(--color-action-tertiary-default);
-    gap: var(--spacing-gap-tightest); /* 6px between label and arrow */
-    padding-inline: 0;
+    color: var(--color-text-primary-muted);
+    border: var(--border-default) solid var(--color-border-default);
   }
 
-  .btn--tertiary:hover{
-    color: var(--color-action-tertiary-hover);
+  .btn--tertiary:hover  { border-color: var(--color-border-strong); color: var(--color-text-primary); }
+  .btn--tertiary:active { background-color: var(--color-bg-surface-light); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn { transition: none; }
   }
 
   @media (max-width: 768px) {
@@ -107,4 +111,5 @@ const showArrow = variant === 'tertiary';
       padding-inline: var(--spacing-component-xs); /* 4px */
     }
   }
+}
 </style>

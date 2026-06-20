@@ -1,6 +1,6 @@
 ---
-import Eyebrow from '../components/Eyebrow.astro';
-import decorAmber from '../assets/icons/eyebrow-decor-amber.svg?url';
+import Eyebrow from '../../components/Eyebrow.astro';
+import decorAmber from '../../assets/icons/eyebrow-decor-amber.svg?url';
 
 const clientTypes = [
   'Cabinete medicale',
@@ -42,6 +42,7 @@ const clientTypes = [
 </section>
 
 <style>
+@layer components {
   .client-types {
     background-color: var(--color-bg-surface-green);
     padding-block: var(--spacing-section-x-compact);  /* 48px */
@@ -158,4 +159,5 @@ const clientTypes = [
 
     .client-types__blur { display: none; }
   }
+}
 </style>
