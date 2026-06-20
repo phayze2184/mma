@@ -31,6 +31,10 @@ const { number, title, body, highlight } = Astro.props;
     align-items: flex-start;
     padding-bottom: var(--spacing-gap-default); /* 20px */
     border-bottom: var(--border-hairline) solid var(--color-border-accent-green);
+
+    @media (max-width: 768px) {
+      padding-inline: var(--spacing-component-md); /* 24px */
+    }
   }
 
   .mistake-card__number {

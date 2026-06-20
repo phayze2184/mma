@@ -44,12 +44,17 @@ const { icon, title, subtitle, documents } = Astro.props;
     background-color: var(--color-bg-surface-light);
     border: var(--border-hairline) solid var(--color-border-default);
     border-radius: var(--radius-card);
-    padding: var(--spacing-component-lg); /* 40px */
+    padding-block: var(--spacing-component-lg);  /* 40px */
+    padding-inline: var(--spacing-component-lg); /* 40px */
     display: flex;
     flex-direction: column;
     gap: var(--spacing-gap-default); /* 20px */
     box-shadow: var(--elevation-2);
- }
+
+    @media (max-width: 768px) {
+      padding-inline: var(--spacing-component-md); /* 24px */
+    }
+  }
 
 
   /* ── Header ── */

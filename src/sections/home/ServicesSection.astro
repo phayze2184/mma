@@ -9,7 +9,7 @@ const services = [
     description: 'Pregătim documentația pentru ONRC, DSP, ISU, Primărie, Colegiul Medicilor și alte instituții relevante.',
     pills: ['Instituții', 'Documente', 'Autorizare'],
     placement: 'top-left' as const,
-    href: `${import.meta.env.BASE_URL}/servicii/deschidere-cabinet/`,
+    href: `${import.meta.env.BASE_URL.replace(/\/$/, '')}/servicii/deschidere-cabinet/`,
   },
   {
     number: '02',
