@@ -192,6 +192,10 @@ const steps = [
 
   .steps-section {
     padding-block: var(--spacing-section-y);
+
+    @media (max-width: 479px) {
+      padding-inline: var(--spacing-component-sm);
+    }
   }
 
   .steps-section__inner {
