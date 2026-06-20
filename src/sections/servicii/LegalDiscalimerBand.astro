@@ -23,9 +23,13 @@
     background-color: var(--color-bg-surface-light);
     border: var(--border-hairline) solid var(--color-border-strong);
     border-radius: var(--radius-2xl); /* 24px */
-    padding-block: var(--spacing-component-lg); /* 40px */
+    padding: var(--spacing-component-lg); /* 40px */
     text-align: center;
     margin-block: var(--spacing-section-y-compact); /* 64px above and below */
+
+    @media (max-width: 479px) {
+      padding-inline: var(--spacing-component-sm);
+    }
   }
 
   .legal-band__label {

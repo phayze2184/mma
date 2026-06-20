@@ -281,6 +281,11 @@ const steps = [
   .steps-section__prev { left:  var(--spacing-component-sm); /* 16px */ }
   .steps-section__next { right: var(--spacing-component-sm); }
 
+  @media (max-width: 768px) {
+    .steps-section__prev,
+    .steps-section__next { display: none; }
+  }
+
 
   /* ── Navigation dots ── */
 
